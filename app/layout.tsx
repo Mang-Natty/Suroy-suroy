@@ -1,0 +1,29 @@
+import type { Metadata } from "next";
+import { Plus_Jakarta_Sans } from "next/font/google";
+import "./globals.css";
+
+const jakarta = Plus_Jakarta_Sans({
+  variable: "--font-jakarta",
+  subsets: ["latin"],
+});
+
+export const metadata: Metadata = {
+  title: {
+    default: "Suroy-Suroy — plan your Philippine trips, light and free",
+    template: "%s · Suroy-Suroy",
+  },
+  description:
+    "A light, local-first travel planner for Philippine adventures. Day-by-day itineraries, maps and routes, a ₱ budget tracker, and packing lists — no signup, everything stays in your browser.",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en" className={`${jakarta.variable} h-full antialiased`}>
+      <body className="flex min-h-dvh flex-col">{children}</body>
+    </html>
+  );
+}

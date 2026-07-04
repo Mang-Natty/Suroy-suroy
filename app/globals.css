@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+/* Suroy-Suroy tokens — see design-system/MASTER.md (light-only, sea-forward).
+   Components use these semantic utilities (bg-sea, text-body…), never raw hex. */
+@theme {
+  --color-sea: #0f766e;
+  --color-sea-deep: #115e59;
+  --color-sea-ink: #134e4a;
+  --color-sea-soft: #ccfbf1;
+  --color-sea-tint: #f0fdfa;
+  --color-sun: #f59e0b;
+  --color-sun-ink: #92400e;
+  --color-sand: #fef3c7;
+  --color-ink: #134e4a;
+  --color-body: #334155;
+  --color-muted: #64748b;
+  --color-line: #e2e8f0;
+  --color-success: #059669;
+  --color-danger: #e11d48;
+
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+}
+
+body {
+  background: var(--color-sea-tint);
+  color: var(--color-body);
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
