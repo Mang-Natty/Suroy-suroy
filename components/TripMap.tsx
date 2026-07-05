@@ -162,7 +162,7 @@ export default function TripMap({
       "justify-content:center;font-weight:800;font-size:18px;line-height:1;" +
       "box-shadow:2px 2px 0 #123f3a;";
     el.textContent = "+";
-    el.setAttribute("aria-label", "New pin — confirm below to add a stop");
+    el.setAttribute("aria-label", "New pin. Confirm below to add a stop");
     pendingMarkerRef.current = new maplibregl.Marker({ element: el, anchor: "center" })
       .setLngLat([pending.lng, pending.lat])
       .addTo(map);

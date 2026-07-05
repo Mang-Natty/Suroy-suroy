@@ -50,7 +50,7 @@ export async function routeDay(
 
   const res = await fetch(url, { headers: { Accept: "application/json" } });
   if (!res.ok) {
-    throw new Error(`Routing server said ${res.status} — try again in a bit.`);
+    throw new Error(`Routing server said ${res.status}. Try again in a bit.`);
   }
   const data = (await res.json()) as OsrmResponse;
   const route = data.routes?.[0];

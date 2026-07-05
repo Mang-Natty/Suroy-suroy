@@ -181,7 +181,7 @@ export default function DayStops({
     <div>
       {stops.length === 0 && !adding && (
         <p className="text-sm text-muted">
-          Free day pa ni — add the first stop.
+          Free day pa ni. Add the first stop.
         </p>
       )}
 

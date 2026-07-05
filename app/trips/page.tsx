@@ -1,19 +1,78 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import type { Trip } from "@/lib/types";
-import { deleteTrip, getTrips } from "@/lib/storage";
+import { deleteTrip, exportData, getTrips, importData } from "@/lib/storage";
 import { dateRange, formatRange } from "@/lib/dates";
 import { TripCover } from "@/components/covers";
 import BackLink from "@/components/BackLink";
+import Modal from "@/components/Modal";
 
 export default function TripsPage() {
   const [trips, setTrips] = useState<Trip[] | null>(null);
+  const [importPending, setImportPending] = useState<{
+    json: string;
+    trips: number;
+    wishes: number;
+  } | null>(null);
+  const [dataMsg, setDataMsg] = useState<string | null>(null);
+  const fileRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
     setTrips(getTrips());
   }, []);
+
+  function doExport() {
+    const blob = new Blob([exportData()], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `suroy-suroy-backup-${new Date().toISOString().slice(0, 10)}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+    setDataMsg("Backup downloaded. Keep it somewhere safe!");
+  }
+
+  function onImportFile(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    e.target.value = "";
+    if (!file) return;
+    file.text().then((text) => {
+      try {
+        const parsed = JSON.parse(text) as {
+          v?: number;
+          trips?: unknown[];
+          wishlist?: unknown[];
+        };
+        if (parsed.v !== 1 || !Array.isArray(parsed.trips)) {
+          throw new Error("bad file");
+        }
+        setDataMsg(null);
+        setImportPending({
+          json: text,
+          trips: parsed.trips.length,
+          wishes: parsed.wishlist?.length ?? 0,
+        });
+      } catch {
+        setDataMsg("That doesn't look like a Suroy-Suroy backup file.");
+      }
+    });
+  }
+
+  function confirmImport() {
+    if (!importPending) return;
+    try {
+      const { trips: t, wishes } = importData(importPending.json);
+      setTrips(getTrips());
+      setDataMsg(
+        `Imported ${t} ${t === 1 ? "trip" : "trips"}${wishes > 0 ? ` and ${wishes} dream ${wishes === 1 ? "spot" : "spots"}` : ""}. Welcome back!`,
+      );
+    } catch (err) {
+      setDataMsg(err instanceof Error ? err.message : "Import failed.");
+    }
+    setImportPending(null);
+  }
 
   function onDelete(trip: Trip) {
     const ok = window.confirm(
@@ -40,13 +99,59 @@ export default function TripsPage() {
         </Link>
       </div>
 
+      <div className="mt-4 flex flex-wrap items-center gap-2">
+        <Link
+          href="/wishlist"
+          className="inline-flex h-11 items-center gap-2 rounded-full border-2 border-ink bg-sea-soft px-4 text-sm font-extrabold text-ink hover:bg-sea hover:text-card focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="h-4 w-4">
+            <path d="M12 21s-7-4.6-7-10a7 7 0 0 1 14 0c0 5.4-7 10-7 10Z" />
+            <path d="M9.5 11 12 8.5l2.5 2.5L12 13.5 9.5 11Z" />
+          </svg>
+          Dream spots
+        </Link>
+        <button
+          type="button"
+          onClick={doExport}
+          className="inline-flex h-11 items-center gap-2 rounded-full border-2 border-ink bg-card px-4 text-sm font-extrabold text-ink hover:bg-sand focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="h-4 w-4">
+            <path d="M12 3v12m0 0 4-4m-4 4-4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" />
+          </svg>
+          Export backup
+        </button>
+        <button
+          type="button"
+          onClick={() => fileRef.current?.click()}
+          className="inline-flex h-11 items-center gap-2 rounded-full border-2 border-ink bg-card px-4 text-sm font-extrabold text-ink hover:bg-sand focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="h-4 w-4">
+            <path d="M12 15V3m0 0 4 4m-4-4-4 4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" />
+          </svg>
+          Import
+        </button>
+        <input
+          ref={fileRef}
+          type="file"
+          accept="application/json,.json"
+          onChange={onImportFile}
+          className="sr-only"
+          aria-label="Import a Suroy-Suroy backup file"
+        />
+      </div>
+      {dataMsg && (
+        <p aria-live="polite" className="mt-3 text-sm font-semibold text-sea-deep">
+          {dataMsg}
+        </p>
+      )}
+
       {trips === null ? null : trips.length === 0 ? (
         <div className="mt-10 rounded-2xl border-2 border-ink bg-card p-8 text-center shadow-poster">
           <h2 className="font-display text-2xl text-ink">
             Wala pay plano? Tara, suroy ta!
           </h2>
           <p className="mt-3 text-base leading-relaxed text-body">
-            No trips yet. Start one — name it, pick the dates, slap a sticker
+            No trips yet. Start one: name it, pick the dates, slap a sticker
             on it, and the day-by-day plan builds itself from there.
           </p>
           <Link
@@ -112,6 +217,19 @@ export default function TripsPage() {
           })}
         </ul>
       )}
+
+      <Modal
+        open={importPending !== null}
+        title="Import this backup?"
+        body={
+          importPending
+            ? `${importPending.trips} ${importPending.trips === 1 ? "trip" : "trips"}${importPending.wishes > 0 ? ` and ${importPending.wishes} dream ${importPending.wishes === 1 ? "spot" : "spots"}` : ""} will be added. Existing trips with the same id get replaced by the backup's version.`
+            : ""
+        }
+        confirmLabel="Import"
+        onConfirm={confirmImport}
+        onClose={() => setImportPending(null)}
+      />
     </main>
   );
 }

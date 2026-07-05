@@ -32,8 +32,8 @@ export default function EditTripPage({
       <main className="mx-auto w-full max-w-xl flex-1 px-4 py-16 text-center sm:px-6">
         <h1 className="font-display text-2xl text-ink">Trip not found</h1>
         <p className="mt-3 text-body">
-          This trip isn&apos;t on this device — remember, plans live in the
-          browser they were made in.
+          This trip isn&apos;t on this device. Plans live in the browser they
+          were made in.
         </p>
         <Link
           href="/trips"

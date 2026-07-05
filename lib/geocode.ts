@@ -62,7 +62,7 @@ export async function searchPlaces(query: string): Promise<GeoResult[]> {
     `https://photon.komoot.io/api/?q=${encodeURIComponent(q)}` +
     `&limit=8&lat=${PH_BIAS.lat}&lon=${PH_BIAS.lon}`;
   const res = await fetch(url, { headers: { Accept: "application/json" } });
-  if (!res.ok) throw new Error(`Search failed (${res.status}) — try again.`);
+  if (!res.ok) throw new Error(`Search failed (${res.status}). Try again.`);
   const data = (await res.json()) as { features?: PhotonFeature[] };
 
   return (data.features ?? [])

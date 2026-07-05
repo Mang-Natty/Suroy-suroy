@@ -123,7 +123,7 @@ export default function TripMapPage({
       const found = await searchPlaces(query);
       setResults(found);
       if (found.length === 0) {
-        setSearchError("Nothing found — try the town or landmark name.");
+        setSearchError("Nothing found. Try the town or landmark name.");
       }
     } catch (err) {
       setSearchError(err instanceof Error ? err.message : "Search failed.");
@@ -191,7 +191,7 @@ export default function TripMapPage({
       const found = await searchPlaces(finderQuery);
       setFinderResults(found);
       if (found.length === 0) {
-        setFinderError("Nothing found — try the spot plus its town.");
+        setFinderError("Nothing found. Try the spot plus its town.");
       }
     } catch (err) {
       setFinderError(err instanceof Error ? err.message : "Search failed.");
@@ -430,7 +430,7 @@ export default function TripMapPage({
         {cacheStale && (
           <div className="mt-3 flex flex-wrap items-center justify-between gap-2">
             <p className="min-w-0 flex-1 text-sm font-semibold text-sun-ink">
-              Stops changed since this route was drawn — hit “Route this day”
+              Stops changed since this route was drawn. Hit “Route this day”
               to refresh it.
             </p>
             <button
@@ -483,12 +483,12 @@ export default function TripMapPage({
         </h2>
         {stops.length === 0 ? (
           <p className="text-sm text-muted">
-            No stops yet —{" "}
+            No stops yet.{" "}
             <Link
               href={`/trips/${trip.id}`}
               className="font-extrabold text-sea underline-offset-4 hover:underline"
             >
-              add some in the plan
+              Add some in the plan
             </Link>{" "}
             first.
           </p>
@@ -532,7 +532,7 @@ export default function TripMapPage({
                         htmlFor="place-search"
                         className="mb-1.5 block text-sm font-extrabold text-ink"
                       >
-                        Search a spot — cafés, inns, falls, dive shops…
+                        Search a spot: cafés, inns, falls, dive shops…
                       </label>
                       <div className="flex gap-2">
                         <input
@@ -601,7 +601,7 @@ export default function TripMapPage({
         )}
         <p className="mt-4 text-xs text-muted">
           Map data © OpenStreetMap contributors · tiles © CARTO · search by
-          Photon (komoot) · routing by OSRM / FOSSGIS demo servers — searches
+          Photon (komoot) · routing by OSRM / FOSSGIS demo servers. Searches
           and routes run only when you ask, and routes are cached with the
           trip.
         </p>
@@ -610,7 +610,7 @@ export default function TripMapPage({
       <Modal
         open={confirmRemoveRoute}
         title="Remove this day's route?"
-        body="The drawn line and its distance info will be cleared. Your stops stay exactly where they are — you can route the day again anytime."
+        body="The drawn line and its distance info will be cleared. Your stops stay exactly where they are, and you can route the day again anytime."
         confirmLabel="Remove route"
         danger
         onConfirm={removeRoute}

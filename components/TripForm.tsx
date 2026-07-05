@@ -25,7 +25,7 @@ export default function TripForm({ trip }: { trip?: Trip }) {
     e.preventDefault();
     const trimmed = name.trim();
     if (!trimmed) {
-      setError("Give the trip a name — even 'Secret beach run' works.");
+      setError("Give the trip a name. Even 'Secret beach run' works.");
       return;
     }
     const days = dateRange(startDate, endDate);
@@ -54,7 +54,7 @@ export default function TripForm({ trip }: { trip?: Trip }) {
       <div className="flex items-center gap-4">
         <TripCover color={color} icon={icon} size="lg" />
         <p className="text-sm text-muted">
-          Your trip&apos;s sticker — pick a color and a vibe below.
+          Your trip&apos;s sticker. Pick a color and a vibe below.
         </p>
       </div>
 

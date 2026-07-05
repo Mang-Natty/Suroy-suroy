@@ -15,11 +15,11 @@ const slab = Alfa_Slab_One({
 
 export const metadata: Metadata = {
   title: {
-    default: "Suroy-Suroy — plan your Philippine trips, light and free",
+    default: "Suroy-Suroy: plan your Philippine trips, light and free",
     template: "%s · Suroy-Suroy",
   },
   description:
-    "A light, local-first travel planner for Philippine adventures. Day-by-day itineraries, maps and routes, a ₱ budget tracker, and packing lists — no signup, everything stays in your browser.",
+    "A light, local-first travel planner for Philippine adventures. Day-by-day itineraries, maps and routes, a ₱ budget tracker, and packing lists. No signup, everything stays in your browser.",
 };
 
 export default function RootLayout({

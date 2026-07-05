@@ -1,4 +1,4 @@
-import type { StorageSchema, Trip } from "./types";
+import type { StorageSchema, Trip, WishPlace } from "./types";
 
 /**
  * THE only module that touches persistence (hard rule — see CLAUDE.md).
@@ -65,8 +65,56 @@ export function deleteTrip(id: string): void {
   persist(data);
 }
 
-/** M5 export/import will serialize single trips through here too, so the
-    file format stays in the storage module's control. */
+export function getWishlist(): WishPlace[] {
+  return load().wishlist ?? [];
+}
+
+export function saveWishlist(wishlist: WishPlace[]): void {
+  const data = load();
+  data.wishlist = wishlist;
+  persist(data);
+}
+
+/** Whole-data backup: trips + wishlist in the versioned envelope. */
 export function exportData(): string {
   return JSON.stringify(load(), null, 2);
+}
+
+/** Merge a backup file into current data (imported entries win on id
+    collision). Throws with a friendly message on anything malformed. */
+export function importData(json: string): { trips: number; wishes: number } {
+  let parsed: Partial<StorageSchema>;
+  try {
+    parsed = JSON.parse(json) as Partial<StorageSchema>;
+  } catch {
+    throw new Error("That file isn't valid JSON.");
+  }
+  if (parsed.v !== 1 || !Array.isArray(parsed.trips)) {
+    throw new Error("That doesn't look like a Suroy-Suroy backup file.");
+  }
+  const data = load();
+  let trips = 0;
+  for (const trip of parsed.trips) {
+    if (!trip || typeof trip.id !== "string" || typeof trip.name !== "string")
+      continue;
+    const i = data.trips.findIndex((t) => t.id === trip.id);
+    if (i === -1) data.trips.push(trip);
+    else data.trips[i] = trip;
+    trips++;
+  }
+  let wishes = 0;
+  if (Array.isArray(parsed.wishlist)) {
+    const current = data.wishlist ?? [];
+    for (const wish of parsed.wishlist) {
+      if (!wish || typeof wish.id !== "string" || typeof wish.name !== "string")
+        continue;
+      const i = current.findIndex((w) => w.id === wish.id);
+      if (i === -1) current.push(wish);
+      else current[i] = wish;
+      wishes++;
+    }
+    data.wishlist = current;
+  }
+  persist(data);
+  return { trips, wishes };
 }

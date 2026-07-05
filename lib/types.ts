@@ -87,8 +87,20 @@ export type Trip = {
   updatedAt: string;
 };
 
-/** The single versioned blob persisted by lib/storage.ts */
+/** Bucket-list place — deliberately not a trip (simplest possible model) */
+export type WishPlace = {
+  id: string;
+  name: string;
+  detail?: string;
+  lat: number;
+  lng: number;
+  createdAt: string;
+};
+
+/** The single versioned blob persisted by lib/storage.ts.
+    wishlist is optional so pre-M5 stored data stays valid. */
 export type StorageSchema = {
   v: 1;
   trips: Trip[];
+  wishlist?: WishPlace[];
 };

@@ -44,9 +44,9 @@ export function formatDay(key: string): string {
   return `${get("weekday")} · ${get("month")} ${get("day")}`;
 }
 
-/** "Jul 5 – Jul 9" (single date if same day) */
+/** "Jul 5 to Jul 9" (single date if same day) */
 export function formatRange(startDate: string, endDate: string): string {
   const s = RANGE_FMT.format(parseKey(startDate));
   const e = RANGE_FMT.format(parseKey(endDate));
-  return s === e ? s : `${s} – ${e}`;
+  return s === e ? s : `${s} to ${e}`;
 }

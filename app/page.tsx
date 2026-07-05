@@ -14,7 +14,7 @@ const features = [
   },
   {
     title: "Traveler map & routes",
-    body: "See every stop on a real map and trace the route between them — with distance and travel time.",
+    body: "See every stop on a real map and trace the route between them, with distance and travel time.",
     chip: "bg-mango text-ink",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="h-6 w-6">
@@ -37,7 +37,7 @@ const features = [
   },
   {
     title: "Packing checklist",
-    body: "Beach, hike, or city templates plus your own must-brings — tick them off and forget nothing.",
+    body: "Beach, hike, or city templates plus your own must-brings. Tick them off and forget nothing.",
     chip: "bg-mango text-ink",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="h-6 w-6">
@@ -69,7 +69,7 @@ export default function Home() {
             </p>
             <p className="mt-4 text-base leading-relaxed text-body sm:text-lg">
               <em>Suroy-suroy</em> is Cebuano for wandering around just for the
-              fun of it. This is a light travel planner in that same spirit —
+              fun of it. This is a light travel planner in that same spirit:
               your days, stops, routes, ₱ budget, and packing list in one page
               that lives entirely in your browser.
             </p>
@@ -85,7 +85,7 @@ export default function Home() {
                 </svg>
               </Link>
               <p className="mt-3 text-sm text-muted">
-                Free forever. No accounts — your plans stay on your device.
+                Free forever. No accounts, your plans stay on your device.
                 Tara, suroy ta!
               </p>
             </div>

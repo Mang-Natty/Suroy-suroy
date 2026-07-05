@@ -26,7 +26,7 @@ function peso(n: number): string {
 function fundStatus(pct: number): { line: string; barClass: string } {
   if (pct >= 0.66)
     return {
-      line: "Fund is healthy — libre ka pa mag-halo-halo.",
+      line: "Fund is healthy. Libre ka pa mag-halo-halo.",
       barClass: "bg-sea",
     };
   if (pct >= 0.33)
@@ -120,7 +120,7 @@ export default function BudgetPage({
     if (!trip) return;
     const n = Math.floor(Number(amount));
     if (!Number.isFinite(n) || n <= 0) {
-      setFormError("Amount muna — how much did it cost?");
+      setFormError("Amount muna. How much did it cost?");
       return;
     }
     const expense: Expense = {
@@ -315,7 +315,7 @@ export default function BudgetPage({
                   {CATEGORIES[e.category]}
                 </span>
                 <p className="min-w-0 flex-1 truncate text-sm text-body">
-                  {e.note ?? <span className="text-muted">—</span>}
+                  {e.note ?? <span className="text-muted">·</span>}
                 </p>
                 <span className="shrink-0 text-sm font-extrabold tabular-nums text-ink">
                   {peso(e.amount)}
