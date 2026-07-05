@@ -120,7 +120,7 @@ export default function TripForm({ trip }: { trip?: Trip }) {
 
       <fieldset className="mt-5">
         <legend className={labelCls}>Vibe</legend>
-        <div className="grid grid-cols-4 gap-2.5 sm:grid-cols-8">
+        <div className="grid grid-cols-4 gap-2.5">
           {(Object.keys(COVER_ICONS) as CoverIcon[]).map((i) => (
             <button
               key={i}

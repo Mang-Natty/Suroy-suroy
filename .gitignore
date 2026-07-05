@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Private working docs (local only, never pushed)
+CLAUDE.md
+AGENTS.md
+PROJECT_BRIEF.md
+PORTFOLIO_WRITEUP.md
