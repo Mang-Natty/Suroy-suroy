@@ -1,28 +1,37 @@
 @import "tailwindcss";
 
-/* Suroy-Suroy tokens — see design-system/MASTER.md (light-only, sea-forward).
-   Components use these semantic utilities (bg-sea, text-body…), never raw hex. */
+/* Suroy-Suroy v2 tokens — vintage travel poster (design-system/MASTER.md).
+   Light-only. Components use these semantic utilities, never raw hex.
+   #E4572E (bright coral) is decorative-only: fails AA as text/button fill. */
 @theme {
+  --color-paper: #fff4e0;
+  --color-card: #fffdf7;
+  --color-ink: #123f3a;
+  --color-body: #44403c;
+  --color-muted: #57534e;
+  --color-coral: #e4572e;
+  --color-coral-deep: #c2410c;
+  --color-coral-press: #9a3412;
   --color-sea: #0f766e;
   --color-sea-deep: #115e59;
-  --color-sea-ink: #134e4a;
   --color-sea-soft: #ccfbf1;
-  --color-sea-tint: #f0fdfa;
-  --color-sun: #f59e0b;
-  --color-sun-ink: #92400e;
+  --color-mango: #f2a93b;
   --color-sand: #fef3c7;
-  --color-ink: #134e4a;
-  --color-body: #334155;
-  --color-muted: #64748b;
-  --color-line: #e2e8f0;
+  --color-sun-ink: #92400e;
+  --color-line: #e5d5b8;
   --color-success: #059669;
-  --color-danger: #e11d48;
+  --color-danger: #be123c;
+
+  --shadow-poster: 4px 4px 0 0 #123f3a;
+  --shadow-poster-sm: 2px 2px 0 0 #123f3a;
+  --shadow-poster-sea: 4px 4px 0 0 #0f766e;
 
   --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-slab), var(--font-jakarta), serif;
 }
 
 body {
-  background: var(--color-sea-tint);
+  background: var(--color-paper);
   color: var(--color-body);
   font-family: var(--font-sans);
   text-rendering: optimizeLegibility;

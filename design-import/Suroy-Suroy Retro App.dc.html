@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { margin: 0; background: #FBFBF4; font-family: Geist, system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+    input, select, button { font-family: inherit; }
+    input:focus-visible, select:focus-visible, button:focus-visible, a:focus-visible { outline: 3px solid #10B981; outline-offset: 2px; }
+    @media (min-width: 640px) {
+      .ld-hero { padding-top: 88px !important; }
+      .ld-h1 { font-size: 40px !important; }
+      .ld-cta { width: auto !important; min-width: 320px; }
+      .ld-grid { grid-template-columns: repeat(2, 1fr) !important; }
+      .ld-foot { flex-direction: row !important; justify-content: space-between !important; }
+    }
+    @media (min-width: 1024px) { .ld-grid { grid-template-columns: repeat(4, 1fr) !important; } }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
+  </style>
+</helmet>
+
+<div style="min-height: 100dvh; background-image: radial-gradient(rgba(5,150,105,0.14) 1px, transparent 1px); background-size: 22px 22px;">
+
+  <!-- ═══════════ SCANLINES (tweak) ═══════════ -->
+  <sc-if value="{{ scanlines }}" hint-placeholder-val="{{ false }}">
+    <div style="position: fixed; inset: 0; z-index: 99; pointer-events: none; background: repeating-linear-gradient(0deg, rgba(0,0,0,0.05) 0px, rgba(0,0,0,0.05) 1px, transparent 1px, transparent 3px);"></div>
+  </sc-if>
+
+  <!-- ═══════════ LANDING ═══════════ -->
+  <sc-if value="{{ isLanding }}" hint-placeholder-val="{{ true }}">
+    <div data-screen-label="Landing" style="display: flex; flex-direction: column; min-height: 100dvh;">
+      <main style="flex: 1;">
+        <section class="ld-hero" style="margin: 0 auto; width: 100%; max-width: 1100px; box-sizing: border-box; padding: 56px 20px 40px;">
+          <div style="margin: 0 auto; max-width: 640px; text-align: center;">
+            <p style="display: inline-flex; align-items: center; gap: 8px; margin: 0; border-radius: 4px; background: rgba(0,0,0,0.75); padding: 9px 12px; font-family: 'Press Start 2P', monospace; font-size: 8px; color: #34D399; letter-spacing: .08em;">
+              <svg viewBox="0 0 16 16" style="width: 14px; height: 14px;" shape-rendering="crispEdges" aria-hidden="true"><rect x="5" y="1" width="6" height="2" fill="#E4572E"></rect><rect x="4" y="3" width="8" height="4" fill="#E4572E"></rect><rect x="6" y="7" width="4" height="2" fill="#E4572E"></rect><rect x="7" y="9" width="2" height="3" fill="#E4572E"></rect><rect x="6" y="3" width="4" height="2" fill="#FFFFFF"></rect></svg>
+              PHILIPPINES-FIRST · NO SIGNUP, EVER
+            </p>
+            <h1 class="ld-h1" style="margin: 28px 0 0; font-family: 'Press Start 2P', monospace; font-size: 26px; line-height: 1.4; letter-spacing: .02em; color: #171717;">SUROY-SUROY</h1>
+            <p style="margin: 16px 0 0; font-family: 'Press Start 2P', monospace; font-size: 10px; line-height: 1.8; color: #047857;">PLAN THE TRIP. KEEP THE JOY.</p>
+            <p style="margin: 20px 0 0; font-size: 16px; line-height: 1.65; color: rgba(0,0,0,0.62);"><em>Suroy-suroy</em> is Cebuano for wandering around just for the fun of it. This planner keeps that spirit: your days, stops, routes, ₱ budget, and packing list on one page that lives entirely in your browser.</p>
+            <div style="margin-top: 32px; display: flex; flex-direction: column; align-items: center; gap: 14px;">
+              <button class="ld-cta" onClick="{{ start }}"
+                style="display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; height: 56px; box-sizing: border-box; border: 2px solid #6EE7B7; border-radius: 6px; background: #10B981; color: #FFFFFF; font-family: 'Press Start 2P', monospace; font-size: 11px; box-shadow: 4px 4px 0 rgba(0,0,0,0.4); cursor: pointer; transition: transform 120ms, box-shadow 120ms;"
+                style-hover="background: #34D399;"
+                style-active="transform: translate(3px, 3px); box-shadow: 1px 1px 0 rgba(0,0,0,0.4);">START PLANNING ▶</button>
+              <p style="margin: 0; font-family: 'Press Start 2P', monospace; font-size: 7px; line-height: 1.8; color: rgba(0,0,0,0.4);">FREE FOREVER · SAVED IN YOUR BROWSER</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- pixel archipelago strip -->
+        <section style="margin: 8px auto 0; width: 100%; max-width: 1100px; box-sizing: border-box; padding: 0 20px;">
+          <div style="border: 2px solid rgba(0,0,0,0.8); border-radius: 8px; overflow: hidden; box-shadow: 4px 4px 0 rgba(0,0,0,0.35);">
+            <svg viewBox="0 0 360 96" style="display: block; width: 100%; height: auto; background: linear-gradient(180deg, #38BDF8 0%, #0EA5E9 70%, #0369A1 100%);" shape-rendering="crispEdges" aria-label="Pixel archipelago with a ferry route">
+              <g fill="#7DD3FC"><rect x="14" y="18" width="10" height="2"></rect><rect x="120" y="70" width="10" height="2"></rect><rect x="316" y="24" width="10" height="2"></rect><rect x="228" y="16" width="8" height="2"></rect><rect x="60" y="78" width="8" height="2"></rect></g>
+              <g><rect x="30" y="34" width="26" height="8" fill="#FDE68A"></rect><rect x="26" y="42" width="34" height="16" fill="#4ADE80"></rect><rect x="34" y="58" width="20" height="6" fill="#FDE68A"></rect><rect x="36" y="46" width="8" height="8" fill="#166534"></rect></g>
+              <g><rect x="150" y="46" width="34" height="8" fill="#FDE68A"></rect><rect x="146" y="54" width="44" height="14" fill="#4ADE80"></rect><rect x="154" y="48" width="8" height="6" fill="#A16207"></rect><rect x="168" y="46" width="8" height="6" fill="#A16207"></rect><rect x="172" y="58" width="8" height="6" fill="#166534"></rect></g>
+              <g><rect x="286" y="38" width="30" height="8" fill="#FDE68A"></rect><rect x="282" y="46" width="40" height="16" fill="#4ADE80"></rect><rect x="292" y="50" width="8" height="8" fill="#166534"></rect></g>
+              <g fill="#FFFFFF"><rect x="70" y="52" width="4" height="4"></rect><rect x="84" y="56" width="4" height="4"></rect><rect x="98" y="58" width="4" height="4"></rect><rect x="112" y="58" width="4" height="4"></rect><rect x="126" y="56" width="4" height="4"></rect><rect x="198" y="56" width="4" height="4"></rect><rect x="212" y="54" width="4" height="4"></rect><rect x="226" y="52" width="4" height="4"></rect><rect x="240" y="50" width="4" height="4"></rect><rect x="254" y="48" width="4" height="4"></rect><rect x="268" y="46" width="4" height="4"></rect></g>
+              <g><rect x="100" y="66" width="14" height="5" fill="#78350F"></rect><rect x="105" y="58" width="2" height="8" fill="#FFFFFF"></rect><rect x="107" y="58" width="5" height="5" fill="#F4F4F5"></rect></g>
+              <g><rect x="38" y="26" width="10" height="6" fill="#E4572E"></rect><rect x="40" y="32" width="6" height="3" fill="#E4572E"></rect><rect x="42" y="35" width="2" height="4" fill="#E4572E"></rect><rect x="40" y="27" width="6" height="3" fill="#FFFFFF"></rect></g>
+              <g><rect x="298" y="30" width="2" height="16" fill="#171717"></rect><rect x="300" y="30" width="10" height="6" fill="#34D399"></rect></g>
+            </svg>
+          </div>
+        </section>
+
+        <!-- features -->
+        <section style="margin: 0 auto; width: 100%; max-width: 1100px; box-sizing: border-box; padding: 36px 20px 56px;">
+          <div class="ld-grid" style="display: grid; grid-template-columns: 1fr; gap: 16px;">
+            <div style="border: 2px solid rgba(0,0,0,0.8); border-radius: 8px; background: #FFFFFF; padding: 18px; box-shadow: 3px 3px 0 rgba(0,0,0,0.35);">
+              <span style="display: grid; place-items: center; width: 44px; height: 44px; border: 2px solid rgba(120,53,15,0.7); border-radius: 6px; background: #FEF3C7;"><svg viewBox="0 0 16 16" style="width: 26px; height: 26px;" shape-rendering="crispEdges" aria-hidden="true"><rect x="2" y="3" width="12" height="11" fill="#047857"></rect><rect x="3" y="6" width="10" height="7" fill="#FFFFFF"></rect><rect x="4" y="1" width="2" height="3" fill="#047857"></rect><rect x="10" y="1" width="2" height="3" fill="#047857"></rect><rect x="4" y="8" width="2" height="2" fill="#047857"></rect><rect x="7" y="8" width="2" height="2" fill="#047857"></rect><rect x="10" y="8" width="2" height="2" fill="#34D399"></rect></svg></span>
+              <h3 style="margin: 14px 0 0; font-size: 16px; font-weight: 700; color: #171717;">Day-by-day itinerary</h3>
+              <p style="margin: 6px 0 0; font-size: 14px; line-height: 1.6; color: rgba(0,0,0,0.6);">Turn a date range into days, drop in stops, and shuffle them until the trip feels right.</p>
+            </div>
+            <div style="border: 2px solid rgba(0,0,0,0.8); border-radius: 8px; background: #FFFFFF; padding: 18px; box-shadow: 3px 3px 0 rgba(0,0,0,0.35);">
+              <span style="display: grid; place-items: center; width: 44px; height: 44px; border: 2px solid rgba(120,53,15,0.7); border-radius: 6px; background: #FEF3C7;"><svg viewBox="0 0 16 16" style="width: 26px; height: 26px;" shape-rendering="crispEdges" aria-hidden="true"><rect x="1" y="2" width="14" height="12" fill="#0EA5E9"></rect><rect x="2" y="8" width="5" height="5" fill="#4ADE80"></rect><rect x="9" y="3" width="5" height="4" fill="#4ADE80"></rect><rect x="10" y="9" width="2" height="2" fill="#FFFFFF"></rect><rect x="6" y="5" width="2" height="2" fill="#FFFFFF"></rect><rect x="8" y="7" width="2" height="2" fill="#FFFFFF"></rect></svg></span>
+              <h3 style="margin: 14px 0 0; font-size: 16px; font-weight: 700; color: #171717;">Traveler map &amp; routes</h3>
+              <p style="margin: 6px 0 0; font-size: 14px; line-height: 1.6; color: rgba(0,0,0,0.6);">See every stop on the pixel archipelago and trace the route between islands.</p>
+            </div>
+            <div style="border: 2px solid rgba(0,0,0,0.8); border-radius: 8px; background: #FFFFFF; padding: 18px; box-shadow: 3px 3px 0 rgba(0,0,0,0.35);">
+              <span style="display: grid; place-items: center; width: 44px; height: 44px; border: 2px solid rgba(120,53,15,0.7); border-radius: 6px; background: #FEF3C7;"><svg viewBox="0 0 16 16" style="width: 26px; height: 26px;" shape-rendering="crispEdges" aria-hidden="true"><rect x="2" y="6" width="12" height="8" fill="#B45309"></rect><rect x="3" y="4" width="10" height="2" fill="#D97706"></rect><rect x="10" y="8" width="4" height="4" fill="#FBBF24"></rect><rect x="11" y="9" width="1" height="2" fill="#78350F"></rect></svg></span>
+              <h3 style="margin: 14px 0 0; font-size: 16px; font-weight: 700; color: #171717;">Budget in pesos</h3>
+              <p style="margin: 6px 0 0; font-size: 14px; line-height: 1.6; color: rgba(0,0,0,0.6);">Set a trip budget, log the lechon and the tricycle rides, and watch the funds bar tell the truth.</p>
+            </div>
+            <div style="border: 2px solid rgba(0,0,0,0.8); border-radius: 8px; background: #FFFFFF; padding: 18px; box-shadow: 3px 3px 0 rgba(0,0,0,0.35);">
+              <span style="display: grid; place-items: center; width: 44px; height: 44px; border: 2px solid rgba(120,53,15,0.7); border-radius: 6px; background: #FEF3C7;"><svg viewBox="0 0 16 16" style="width: 26px; height: 26px;" shape-rendering="crispEdges" aria-hidden="true"><rect x="4" y="5" width="8" height="9" fill="#166534"></rect><rect x="5" y="2" width="6" height="3" fill="#22C55E"></rect><rect x="6" y="8" width="4" height="3" fill="#FDE68A"></rect><rect x="2" y="6" width="2" height="5" fill="#22C55E"></rect><rect x="12" y="6" width="2" height="5" fill="#22C55E"></rect></svg></span>
+              <h3 style="margin: 14px 0 0; font-size: 16px; font-weight: 700; color: #171717;">Packing checklist</h3>
+              <p style="margin: 6px 0 0; font-size: 14px; line-height: 1.6; color: rgba(0,0,0,0.6);">Beach, hike, or city templates plus your own must-brings. Tick them off, forget nothing.</p>
+            </div>
+          </div>
+        </section>
+      </main>
+      <footer style="border-top: 2px solid rgba(0,0,0,0.8); background: #171717;">
+        <div class="ld-foot" style="margin: 0 auto; display: flex; width: 100%; max-width: 1100px; flex-direction: column; align-items: center; gap: 10px; box-sizing: border-box; padding: 18px 20px; text-align: center;">
+          <p style="margin: 0; font-family: 'Press Start 2P', monospace; font-size: 7px; line-height: 1.8; color: rgba(255,255,255,0.55);">BUILT BY <a href="https://natty-devtravels.vercel.app" style="color: #34D399; text-decoration: none;">NATTYDEV</a></p>
+          <p style="margin: 0; font-family: 'Press Start 2P', monospace; font-size: 7px; line-height: 1.8; color: rgba(255,255,255,0.35);">LOCAL-FIRST: NO SERVERS, NO TRACKING, JUST YOUR BROWSER</p>
+        </div>
+      </footer>
+    </div>
+  </sc-if>
+
+  <!-- ═══════════ TRIPS LIST ═══════════ -->
+  <sc-if value="{{ isTrips }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="Trips list" style="margin: 0 auto; max-width: 440px; min-height: 100dvh; display: flex; flex-direction: column; box-sizing: border-box; padding: 16px 16px 24px;">
+      <div style="display: flex; align-items: center; justify-content: space-between;">
+        <button aria-label="Back to landing" onClick="{{ goLanding }}" style="display: grid; place-items: center; width: 44px; height: 44px; border: 2px solid #262626; border-radius: 6px; background: #171717; color: #fff; box-shadow: 2px 2px 0 rgba(0,0,0,0.4); cursor: pointer;" style-active="transform: translate(2px,2px); box-shadow: 0 0 0 rgba(0,0,0,0.4);">
+          <svg viewBox="0 0 16 16" style="width: 18px; height: 18px;" shape-rendering="crispEdges" aria-hidden="true"><rect x="7" y="7" width="2" height="2" fill="#fff"></rect><rect x="9" y="5" width="2" height="2" fill="#fff"></rect><rect x="9" y="9" width="2" height="2" fill="#fff"></rect><rect x="11" y="3" width="2" height="2" fill="#fff"></rect><rect x="11" y="11" width="2" height="2" fill="#fff"></rect></svg>
+        </button>
+        <span style="font-family: 'Press Start 2P', monospace; font-size: 8px; color: rgba(0,0,0,0.4); letter-spacing: .1em;">SUROY-SUROY</span>
+        <span style="width: 44px;"></span>
+      </div>
+
+      <p style="margin: 22px 0 0; text-align: center; font-family: 'Press Start 2P', monospace; font-size: 8px; letter-spacing: .2em; color: #047857;">★ YOUR TRIPS ★</p>
+
+      <div style="flex: 1; display: flex; flex-direction: column; gap: 12px; margin-top: 18px;">
+        <sc-for list="{{ trips }}" as="t" hint-placeholder-count="2">
+          <div style="position: relative; border: 2px solid rgba(0,0,0,0.8); border-radius: 8px; background: #FFFFFF; box-shadow: 3px 3px 0 rgba(0,0,0,0.35);">
+            <button onClick="{{ t.open }}" style="display: flex; align-items: center; gap: 14px; width: 100%; box-sizing: border-box; border: none; background: transparent; padding: 16px; text-align: left; cursor: pointer;">
+              <span style="flex: none; display: grid; place-items: center; width: 48px; height: 48px; border: 2px solid rgba(120,53,15,0.7); border-radius: 6px; background: #FEF3C7;">
+                <svg viewBox="0 0 16 16" style="width: 30px; height: 30px;" shape-rendering="crispEdges" aria-hidden="true"><rect x="2" y="10" width="12" height="3" fill="#0EA5E9"></rect><rect x="4" y="5" width="8" height="3" fill="#FDE68A"></rect><rect x="3" y="8" width="10" height="2" fill="#4ADE80"></rect><rect x="6" y="2" width="3" height="3" fill="#166534"></rect></svg>
+              </span>
+              <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 5px;">
+                <span style="font-size: 17px; font-weight: 700; color: #171717;">{{ t.name }}</span>
+                <span style="font-family: 'Press Start 2P', monospace; font-size: 7px; line-height: 1.6; color: rgba(0,0,0,0.45);">{{ t.meta }}</span>
+              </span>
+              <svg viewBox="0 0 16 16" style="width: 16px; height: 16px; flex: none;" shape-rendering="crispEdges" aria-hidden="true"><rect x="5" y="3" width="2" height="2" fill="#047857"></rect><rect x="7" y="5" width="2" height="2" fill="#047857"></rect><rect x="9" y="7" width="2" height="2" fill="#047857"></rect><rect x="7" y="9" width="2" height="2" fill="#047857"></rect><rect x="5" y="11" width="2" height="2" fill="#047857"></rect></svg>
+            </button>
+            <button aria-label="Delete trip" onClick="{{ t.remove }}" style="position: absolute; top: -10px; right: -10px; display: grid; place-items: center; width: 28px; height: 28px; border: 2px solid #262626; border-radius: 6px; background: #171717; color: #fff; font-family: 'Press Start 2P', monospace; font-size: 8px; box-shadow: 2px 2px 0 rgba(0,0,0,0.4); cursor: pointer;">✕</button>
+          </div>
+        </sc-for>
+
+        <sc-if value="{{ noTrips }}" hint-placeholder-val="{{ false }}">
+          <div style="border: 2px dashed rgba(0,0,0,0.3); border-radius: 8px; padding: 32px 20px; text-align: center;">
+            <p style="margin: 0; font-family: 'Press Start 2P', monospace; font-size: 9px; line-height: 2; color: rgba(0,0,0,0.55);">WALA PAY PLANO?</p>
+            <p style="margin: 8px 0 0; font-size: 14px; color: rgba(0,0,0,0.55);">Tara, suroy ta! Start your first trip below.</p>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ newTripOpen }}" hint-placeholder-val="{{ false }}">
+          <div style="border: 2px solid rgba(0,0,0,0.8); border-radius: 8px; background: #FFFDF3; padding: 16px; box-shadow: 3px 3px 0 rgba(0,0,0,0.35); display: flex; flex-direction: column; gap: 12px;">
+            <p style="margin: 0; font-family: 'Press Start 2P', monospace; font-size: 8px; letter-spacing: .15em; color: #92400E;">NEW TRIP</p>
+            <label style="display: flex; flex-direction: column; gap: 6px;">
+              <span style="font-family: 'Press Start 2P', monospace; font-size: 7px; color: rgba(0,0,0,0.5);">TRIP NAME</span>
+              <input value="{{ tripName }}" onChange="{{ onTripName }}" placeholder="Siargao with the barkada" style="height: 44px; box-sizing: border-box; border: 2px solid rgba(0,0,0,0.8); border-radius: 6px; background: #FFFFFF; padding: 0 12px; font-size: 15px; color: #171717;">
+            </label>
+            <div style="display: flex; gap: 10px;">
+              <label style="flex: 1; display: flex; flex-direction: column; gap: 6px;">
+                <span style="font-family: 'Press Start 2P', monospace; font-size: 7px; color: rgba(0,0,0,0.5);">START DATE</span>
+                <input type="date" value="{{ tripStart }}" onChange="{{ onTripStart }}" style="height: 44px; box-sizing: border-box; border: 2px solid rgba(0,0,0,0.8); border-radius: 6px; background: #FFFFFF; padding: 0 10px; font-size: 14px; color: #171717;">
+              </label>
+              <label style="width: 90px; display: flex; flex-direction: column; gap: 6px;">
+                <span style="font-family: 'Press Start 2P', monospace; font-size: 7px; color: rgba(0,0,0,0.5);">DAYS</span>
+                <input type="number" min="1" max="30" value="{{ tripDays }}" onChange="{{ onTripDays }}" style="height: 44px; box-sizing: border-box; border: 2px solid rgba(0,0,0,0.8); border-radius: 6px; background: #FFFFFF; padding: 0 10px; font-size: 15px; color: #171717;">
+              </label>
+            </div>
+            <div style="display: flex; gap: 10px;">
+              <button onClick="{{ submitTrip }}" style="flex: 1; height: 46px; border: 2px solid #6EE7B7; border-radius: 6px; background: #10B981; color: #fff; font-family: 'Press Start 2P', monospace; font-size: 9px; box-shadow: 3px 3px 0 rgba(0,0,0,0.4); cursor: pointer;" style-active="transform: translate(2px,2px); box-shadow: 1px 1px 0 rgba(0,0,0,0.4);">CREATE ▶</button>
+              <button onClick="{{ toggleNewTrip }}" style="width: 100px; height: 46px; border: 2px solid #525252; border-radius: 6px; background: #262626; color: rgba(255,255,255,0.8); font-family: 'Press Start 2P', monospace; font-size: 9px; box-shadow: 3px 3px 0 rgba(0,0,0,0.4); cursor: pointer;">CANCEL</button>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ newTripClosed }}" hint-placeholder-val="{{ true }}">
+          <button onClick="{{ toggleNewTrip }}" style="display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; height: 52px; border: 2px solid #6EE7B7; border-radius: 6px; background: #10B981; color: #fff; font-family: 'Press Start 2P', monospace; font-size: 10px; box-shadow: 3px 3px 0 rgba(0,0,0,0.4); cursor: pointer;" style-hover="background: #34D399;" style-active="transform: translate(2px,2px); box-shadow: 1px 1px 0 rgba(0,0,0,0.4);">NEW TRIP +</button>
+        </sc-if>
+      </div>
+
+      <p style="margin: 24px 0 0; text-align: center; font-family: 'Press Start 2P', monospace; font-size: 6.5px; line-height: 1.8; color: rgba(0,0,0,0.35);">SAVED IN YOUR BROWSER · NO SERVERS</p>
+    </div>
+  </sc-if>
+
+  <!-- ═══════════ TRIP PLANNER ═══════════ -->
+  <sc-if value="{{ isTrip }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="Trip planner" style="margin: 0 auto; max-width: 440px; min-height: 100dvh; display: flex; flex-direction: column; box-sizing: border-box;">
+
+      <!-- top bar -->
+      <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 16px 0;">
+        <button aria-label="Back to trips" onClick="{{ goTrips }}" style="display: grid; place-items: center; width: 44px; height: 44px; border: 2px solid #262626; border-radius: 6px; background: #171717; color: #fff; box-shadow: 2px 2px 0 rgba(0,0,0,0.4); cursor: pointer;" style-active="transform: translate(2px,2px); box-shadow: 0 0 0 rgba(0,0,0,0.4);">
+          <svg viewBox="0 0 16 16" style="width: 18px; height: 18px;" shape-rendering="crispEdges" aria-hidden="true"><rect x="7" y="7" width="2" height="2" fill="#fff"></rect><rect x="9" y="5" width="2" height="2" fill="#fff"></rect><rect x="9" y="9" width="2" height="2" fill="#fff"></rect><rect x="11" y="3" width="2" height="2" fill="#fff"></rect><rect x="11" y="11" width="2" height="2" fill="#fff"></rect></svg>
+        </button>
+        <button onClick="{{ goFunds }}" aria-label="Open budget" style="display: inline-flex; align-items: center; border: none; border-radius: 4px; background: rgba(0,0,0,0.75); padding: 10px 12px; font-family: 'Press Start 2P', monospace; font-size: 8px; color: #34D399; letter-spacing: .05em; cursor: pointer;">{{ remainingChip }}</button>
+      </div>
+
+      <!-- title -->
+      <div style="padding: 14px 20px 0;">
+        <p style="margin: 0; font-family: 'Press Start 2P', monospace; font-size: 7px; letter-spacing: .18em; color: #047857;">★ QUEST LOG ★</p>
+        <h2 style="margin: 10px 0 0; font-family: 'Press Start 2P', monospace; font-size: 14px; line-height: 1.6; color: #171717;">{{ tripTitle }}</h2>
+        <p style="margin: 7px 0 0; font-size: 13.5px; font-weight: 500; color: rgba(0,0,0,0.5);">{{ tripMeta }}</p>
+      </div>
+
+      <!-- ══ DAYS TAB ══ -->
+      <sc-if value="{{ tabDays }}" hint-placeholder-val="{{ true }}">
+        <div style="display: flex; gap: 8px; padding: 16px 20px 4px; overflow-x: auto;">
+          <sc-for list="{{ dayChips }}" as="d" hint-placeholder-count="5">
+            <button onClick="{{ d.select }}" style="flex: none; display: flex; flex-direction: column; align-items: center; gap: 3px; min-width: 52px; padding: 9px 6px; border: 2px solid {{ d.border }}; border-radius: 6px; background: {{ d.bg }}; box-shadow: {{ d.shadow }}; cursor: pointer;">
+              <span style="font-family: 'Press Start 2P', monospace; font-size: 6.5px; color: {{ d.subColor }};">{{ d.sub }}</span>
+              <span style="font-family: 'Press Start 2P', monospace; font-size: 11px; color: {{ d.numColor }};">{{ d.num }}</span>
+            </button>
+          </sc-for>
+        </div>
+
+        <button onClick="{{ renameDay }}" style="margin: 14px 20px 0; padding: 0; border: none; background: transparent; text-align: left; font-family: 'Press Start 2P', monospace; font-size: 8px; line-height: 1.8; color: #047857; cursor: pointer;">{{ dayTitle }} ✎</button>
+
+        <div style="flex: 1; display: flex; flex-direction: column; gap: 10px; padding: 10px 20px 14px;">
+          <sc-for list="{{ stops }}" as="s" hint-placeholder-count="3">
+            <div style="display: flex; gap: 12px; align-items: flex-start; border: 2px solid rgba(0,0,0,0.8); border-radius: 8px; background: #FFFFFF; padding: 12px 14px; box-shadow: 3px 3px 0 rgba(0,0,0,0.35);">
+              <div style="flex: none; display: flex; flex-direction: column; gap: 4px; align-items: center;">
+                <button aria-label="Move stop up" onClick="{{ s.up }}" style="display: grid; place-items: center; width: 30px; height: 26px; border: 2px solid rgba(0,0,0,0.25); border-radius: 4px; background: #F5F5F0; color: {{ s.upColor }}; cursor: pointer; font-size: 11px; line-height: 1;">▲</button>
+                <button aria-label="Move stop down" onClick="{{ s.down }}" style="display: grid; place-items: center; width: 30px; height: 26px; border: 2px solid rgba(0,0,0,0.25); border-radius: 4px; background: #F5F5F0; color: {{ s.downColor }}; cursor: pointer; font-size: 11px; line-height: 1;">▼</button>
+              </div>
+              <div style="flex: 1; min-width: 0;">
+                <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 8px;">
+                  <span style="font-size: 15px; font-weight: 700; color: #171717;">{{ s.title }}</span>
+                  <span style="flex: none; font-family: 'Press Start 2P', monospace; font-size: 8px; color: #047857;">{{ s.time }}</span>
+                </div>
+                <p style="margin: 4px 0 0; font-size: 13px; line-height: 1.5; color: rgba(0,0,0,0.55);">{{ s.note }}</p>
+              </div>
+              <button aria-label="Delete stop" onClick="{{ s.remove }}" style="flex: none; display: grid; place-items: center; width: 28px; height: 28px; border: 2px solid rgba(0,0,0,0.25); border-radius: 4px; background: #F5F5F0; color: rgba(0,0,0,0.45); font-size: 11px; cursor: pointer;">✕</button>
+            </div>
+          </sc-for>
+
+          <sc-if value="{{ noStops }}" hint-placeholder-val="{{ false }}">
+            <div style="border: 2px dashed rgba(0,0,0,0.3); border-radius: 8px; padding: 26px 18px; text-align: center;">
+              <p style="margin: 0; font-family: 'Press Start 2P', monospace; font-size: 8px; line-height: 2; color: rgba(0,0,0,0.5);">EMPTY DAY!</p>
+              <p style="margin: 6px 0 0; font-size: 14px; color: rgba(0,0,0,0.55);">Tara, suroy ta! Add the first stop.</p>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ addStopOpen }}" hint-placeholder-val="{{ false }}">
+            <div style="border: 2px solid rgba(0,0,0,0.8); border-radius: 8px; background: #FFFDF3; padding: 14px; box-shadow: 3px 3px 0 rgba(0,0,0,0.35); display: flex; flex-direction: column; gap: 10px;">
+              <div style="display: flex; gap: 10px;">
+                <label style="width: 110px; display: flex; flex-direction: column; gap: 6px;">
+                  <span style="font-family: 'Press Start 2P', monospace; font-size: 7px; color: rgba(0,0,0,0.5);">TIME</span>
+                  <input type="time" value="{{ stopTime }}" onChange="{{ onStopTime }}" style="height: 44px; box-sizing: border-box; border: 2px solid rgba(0,0,0,0.8); border-radius: 6px; background: #FFFFFF; padding: 0 8px; font-size: 14px; color: #171717;">
+                </label>
+                <label style="flex: 1; display: flex; flex-direction: column; gap: 6px;">
+                  <span style="font-family: 'Press Start 2P', monospace; font-size: 7px; color: rgba(0,0,0,0.5);">STOP</span>
+                  <input value="{{ stopTitle }}" onChange="{{ onStopTitle }}" placeholder="Kawasan Falls" style="height: 44px; box-sizing: border-box; border: 2px solid rgba(0,0,0,0.8); border-radius: 6px; background: #FFFFFF; padding: 0 12px; font-size: 15px; color: #171717;">
+                </label>
+              </div>
+              <label style="display: flex; flex-direction: column; gap: 6px;">
+                <span style="font-family: 'Press Start 2P', monospace; font-size: 7px; color: rgba(0,0,0,0.5);">NOTE (OPTIONAL)</span>
+                <input value="{{ stopNote }}" onChange="{{ onStopNote }}" placeholder="Bring aqua shoes" style="height: 44px; box-sizing: border-box; border: 2px solid rgba(0,0,0,0.8); border-radius: 6px; background: #FFFFFF; padding: 0 12px; font-size: 15px; color: #171717;">
+              </label>
+              <div style="display: flex; gap: 10px;">
+                <button onClick="{{ submitStop }}" style="flex: 1; height: 46px; border: 2px solid #6EE7B7; border-radius: 6px; background: #10B981; color: #fff; font-family: 'Press Start 2P', monospace; font-size: 9px; box-shadow: 3px 3px 0 rgba(0,0,0,0.4); cursor: pointer;" style-active="transform: translate(2px,2px); box-shadow: 1px 1px 0 rgba(0,0,0,0.4);">ADD ▶</button>
+                <button onClick="{{ toggleAddStop }}" style="width: 100px; height: 46px; border: 2px solid #525252; border-radius: 6px; background: #262626; color: rgba(255,255,255,0.8); font-family: 'Press Start 2P', monospace; font-size: 9px; box-shadow: 3px 3px 0 rgba(0,0,0,0.4); cursor: pointer;">CANCEL</button>
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ addStopClosed }}" hint-placeholder-val="{{ true }}">
+            <button onClick="{{ toggleAddStop }}" style="display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; height: 48px; margin-top: 4px; border: 2px solid #6EE7B7; border-radius: 6px; background: #10B981; color: #fff; font-family: 'Press Start 2P', monospace; font-size: 10px; box-shadow: 3px 3px 0 rgba(0,0,0,0.4); cursor: pointer;" style-hover="background: #34D399;" style-active="transform: translate(2px,2px); box-shadow: 1px 1px 0 rgba(0,0,0,0.4);">ADD STOP +</button>
+          </sc-if>
+        </div>
+      </sc-if>
+
+      <!-- ══ MAP TAB ══ -->
+      <sc-if value="{{ tabMap }}" hint-placeholder-val="{{ false }}">
+        <div style="flex: 1; display: flex; flex-direction: column; gap: 14px; padding: 16px 20px;">
+          <div style="border: 2px solid rgba(0,0,0,0.8); border-radius: 8px; overflow: hidden; box-shadow: 3px 3px 0 rgba(0,0,0,0.35);">
+            <svg viewBox="0 0 188 165" style="display: block; width: 100%; height: auto; background: linear-gradient(180deg, #38BDF8 0%, #0EA5E9 60%, #0369A1 100%);" shape-rendering="crispEdges" aria-label="Pixel map of the route">
+              <g fill="#7DD3FC"><rect x="8" y="22" width="10" height="2"></rect><rect x="150" y="30" width="10" height="2"></rect><rect x="30" y="120" width="10" height="2"></rect><rect x="160" y="140" width="10" height="2"></rect><rect x="96" y="60" width="8" height="2"></rect><rect x="20" y="150" width="8" height="2"></rect></g>
+              <g><rect x="30" y="18" width="18" height="8" fill="#FDE68A"></rect><rect x="26" y="26" width="26" height="10" fill="#FDE68A"></rect><rect x="24" y="36" width="30" height="34" fill="#4ADE80"></rect><rect x="30" y="70" width="26" height="16" fill="#4ADE80"></rect><rect x="36" y="86" width="18" height="10" fill="#FDE68A"></rect><rect x="32" y="44" width="8" height="8" fill="#166534"></rect><rect x="42" y="56" width="8" height="8" fill="#166534"></rect><rect x="38" y="30" width="6" height="6" fill="#22C55E"></rect></g>
+              <g><rect x="120" y="112" width="40" height="8" fill="#FDE68A"></rect><rect x="114" y="120" width="52" height="20" fill="#4ADE80"></rect><rect x="120" y="140" width="42" height="8" fill="#FDE68A"></rect><rect x="126" y="114" width="8" height="6" fill="#A16207"></rect><rect x="138" y="112" width="8" height="6" fill="#A16207"></rect><rect x="150" y="114" width="8" height="6" fill="#A16207"></rect><rect x="132" y="126" width="8" height="8" fill="#166534"></rect></g>
+              <g fill="#FFFFFF"><rect x="58" y="78" width="4" height="4"></rect><rect x="68" y="86" width="4" height="4"></rect><rect x="78" y="94" width="4" height="4"></rect><rect x="88" y="102" width="4" height="4"></rect><rect x="98" y="110" width="4" height="4"></rect><rect x="108" y="118" width="4" height="4"></rect></g>
+              <g><rect x="80" y="88" width="12" height="4" fill="#78350F"></rect><rect x="84" y="82" width="2" height="6" fill="#FFFFFF"></rect><rect x="86" y="82" width="4" height="4" fill="#F4F4F5"></rect></g>
+              <g><rect x="36" y="48" width="10" height="6" fill="#E4572E"></rect><rect x="38" y="54" width="6" height="3" fill="#E4572E"></rect><rect x="40" y="57" width="2" height="4" fill="#E4572E"></rect><rect x="38" y="49" width="4" height="3" fill="#FFFFFF"></rect></g>
+              <g><rect x="136" y="118" width="2" height="12" fill="#171717"></rect><rect x="138" y="118" width="8" height="5" fill="#34D399"></rect></g>
+            </svg>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <sc-for list="{{ mapDays }}" as="m" hint-placeholder-count="3">
+              <button onClick="{{ m.select }}" style="display: flex; align-items: center; gap: 10px; width: 100%; box-sizing: border-box; border: 2px solid rgba(0,0,0,0.8); border-radius: 6px; background: {{ m.bg }}; padding: 12px 14px; box-shadow: 2px 2px 0 rgba(0,0,0,0.3); cursor: pointer; text-align: left;">
+                <span style="flex: none; width: 12px; height: 12px; background: {{ m.dot }}; border: 2px solid rgba(0,0,0,0.6);"></span>
+                <span style="flex: 1; font-family: 'Press Start 2P', monospace; font-size: 7.5px; line-height: 1.7; color: #171717;">{{ m.label }}</span>
+                <span style="font-family: 'Press Start 2P', monospace; font-size: 7.5px; color: rgba(0,0,0,0.45);">{{ m.count }}</span>
+              </button>
+            </sc-for>
+          </div>
+          <p style="margin: 0; font-family: 'Press Start 2P', monospace; font-size: 6.5px; line-height: 1.9; color: rgba(0,0,0,0.35); text-align: center;">ILLUSTRATED MAP · TAP A DAY TO OPEN ITS STOPS</p>
+        </div>
+      </sc-if>
+
+      <!-- ══ FUNDS TAB ══ -->
+      <sc-if value="{{ tabFunds }}" hint-placeholder-val="{{ false }}">
+        <div style="flex: 1; display: flex; flex-direction: column; gap: 12px; padding: 16px 20px;">
+          <div style="border: 2px solid rgba(0,0,0,0.8); border-radius: 8px; background: #171717; padding: 16px; box-shadow: 3px 3px 0 rgba(0,0,0,0.35);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+              <span style="font-family: 'Press Start 2P', monospace; font-size: 7px; color: rgba(255,255,255,0.5);">FUNDS</span>
+              <button onClick="{{ editBudget }}" style="border: none; background: transparent; padding: 4px; font-family: 'Press Start 2P', monospace; font-size: 8px; color: #34D399; cursor: pointer;">{{ fundsLabel }} ✎</button>
+            </div>
+            <div style="display: flex; gap: 3px;">
+              <sc-for list="{{ fundSegs }}" as="f" hint-placeholder-count="10">
+                <span style="flex: 1; height: 12px; background: {{ f.bg }}; border: 1px solid #171717; outline: 1px solid #404040;"></span>
+              </sc-for>
+            </div>
+            <p style="margin: 10px 0 0; font-family: 'Press Start 2P', monospace; font-size: 7px; line-height: 1.8; color: {{ fundsMoodColor }};">{{ fundsMood }}</p>
+          </div>
+
+          <sc-for list="{{ expenses }}" as="e" hint-placeholder-count="4">
+            <div style="display: flex; align-items: center; gap: 12px; border: 2px solid rgba(0,0,0,0.8); border-radius: 8px; background: #FFFFFF; padding: 12px 14px; box-shadow: 2px 2px 0 rgba(0,0,0,0.3);">
+              <span style="flex: none; display: inline-flex; padding: 5px 7px; border-radius: 4px; background: {{ e.catBg }}; font-family: 'Press Start 2P', monospace; font-size: 6.5px; color: {{ e.catInk }};">{{ e.cat }}</span>
+              <span style="flex: 1; min-width: 0; font-size: 14.5px; font-weight: 600; color: #171717;">{{ e.label }}</span>
+              <span style="flex: none; font-family: 'Press Start 2P', monospace; font-size: 8.5px; color: #171717;">{{ e.amount }}</span>
+              <button aria-label="Delete expense" onClick="{{ e.remove }}" style="flex: none; display: grid; place-items: center; width: 28px; height: 28px; border: 2px solid rgba(0,0,0,0.25); border-radius: 4px; background: #F5F5F0; color: rgba(0,0,0,0.45); font-size: 11px; cursor: pointer;">✕</button>
+            </div>
+          </sc-for>
+
+          <div style="border: 2px solid rgba(0,0,0,0.8); border-radius: 8px; background: #FFFDF3; padding: 14px; box-shadow: 3px 3px 0 rgba(0,0,0,0.35); display: flex; flex-direction: column; gap: 10px;">
+            <p style="margin: 0; font-family: 'Press Start 2P', monospace; font-size: 8px; letter-spacing: .15em; color: #92400E;">LOG EXPENSE</p>
+            <div style="display: flex; gap: 10px;">
+              <label style="flex: 1; display: flex; flex-direction: column; gap: 6px;">
+                <span style="font-family: 'Press Start 2P', monospace; font-size: 7px; color: rgba(0,0,0,0.5);">WHAT</span>
+                <input value="{{ expLabel }}" onChange="{{ onExpLabel }}" placeholder="Tricycle to port" style="height: 44px; box-sizing: border-box; border: 2px solid rgba(0,0,0,0.8); border-radius: 6px; background: #FFFFFF; padding: 0 12px; font-size: 15px; color: #171717;">
+              </label>
+              <label style="width: 100px; display: flex; flex-direction: column; gap: 6px;">
+                <span style="font-family: 'Press Start 2P', monospace; font-size: 7px; color: rgba(0,0,0,0.5);">₱</span>
+                <input type="number" min="0" value="{{ expAmount }}" onChange="{{ onExpAmount }}" placeholder="150" style="height: 44px; box-sizing: border-box; border: 2px solid rgba(0,0,0,0.8); border-radius: 6px; background: #FFFFFF; padding: 0 10px; font-size: 15px; color: #171717;">
+              </label>
+            </div>
+            <div style="display: flex; gap: 10px;">
+              <select value="{{ expCat }}" onChange="{{ onExpCat }}" aria-label="Category" style="flex: 1; height: 44px; border: 2px solid rgba(0,0,0,0.8); border-radius: 6px; background: #FFFFFF; padding: 0 10px; font-size: 14px; color: #171717;">
+                <option value="FOOD">Food</option>
+                <option value="TRANSPO">Transpo</option>
+                <option value="LODGING">Lodging</option>
+                <option value="FUN">Activities</option>
+                <option value="PASALUBONG">Pasalubong</option>
+              </select>
+              <button onClick="{{ submitExpense }}" style="width: 110px; height: 44px; border: 2px solid #6EE7B7; border-radius: 6px; background: #10B981; color: #fff; font-family: 'Press Start 2P', monospace; font-size: 9px; box-shadow: 3px 3px 0 rgba(0,0,0,0.4); cursor: pointer;" style-active="transform: translate(2px,2px); box-shadow: 1px 1px 0 rgba(0,0,0,0.4);">LOG ▶</button>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- ══ PACK TAB ══ -->
+      <sc-if value="{{ tabPack }}" hint-placeholder-val="{{ false }}">
+        <div style="flex: 1; display: flex; flex-direction: column; gap: 12px; padding: 16px 20px;">
+          <div style="border: 2px solid rgba(0,0,0,0.8); border-radius: 8px; background: #171717; padding: 16px; box-shadow: 3px 3px 0 rgba(0,0,0,0.35);">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+              <span style="font-family: 'Press Start 2P', monospace; font-size: 7px; color: rgba(255,255,255,0.5);">PACKED</span>
+              <span style="font-family: 'Press Start 2P', monospace; font-size: 8px; color: #34D399;">{{ packLabel }}</span>
+            </div>
+            <div style="display: flex; gap: 3px;">
+              <sc-for list="{{ packSegs }}" as="p" hint-placeholder-count="8">
+                <span style="flex: 1; height: 12px; background: {{ p.bg }}; border: 1px solid #171717; outline: 1px solid #404040;"></span>
+              </sc-for>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 8px;">
+            <button onClick="{{ tplBeach }}" style="flex: 1; height: 40px; border: 2px solid rgba(120,53,15,0.7); border-radius: 6px; background: #FEF3C7; color: #92400E; font-family: 'Press Start 2P', monospace; font-size: 7.5px; box-shadow: 2px 2px 0 rgba(0,0,0,0.3); cursor: pointer;">+ BEACH</button>
+            <button onClick="{{ tplHike }}" style="flex: 1; height: 40px; border: 2px solid rgba(120,53,15,0.7); border-radius: 6px; background: #FEF3C7; color: #92400E; font-family: 'Press Start 2P', monospace; font-size: 7.5px; box-shadow: 2px 2px 0 rgba(0,0,0,0.3); cursor: pointer;">+ HIKE</button>
+            <button onClick="{{ tplCity }}" style="flex: 1; height: 40px; border: 2px solid rgba(120,53,15,0.7); border-radius: 6px; background: #FEF3C7; color: #92400E; font-family: 'Press Start 2P', monospace; font-size: 7.5px; box-shadow: 2px 2px 0 rgba(0,0,0,0.3); cursor: pointer;">+ CITY</button>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <sc-for list="{{ packItems }}" as="p" hint-placeholder-count="5">
+              <div style="display: flex; align-items: center; gap: 12px; border: 2px solid rgba(0,0,0,0.8); border-radius: 8px; background: #FFFFFF; padding: 10px 14px; box-shadow: 2px 2px 0 rgba(0,0,0,0.3);">
+                <button onClick="{{ p.toggle }}" aria-label="Toggle packed" style="flex: none; display: grid; place-items: center; width: 32px; height: 32px; border: 2px solid rgba(0,0,0,0.8); border-radius: 4px; background: {{ p.boxBg }}; color: #FFFFFF; font-size: 14px; font-weight: 700; cursor: pointer;">{{ p.mark }}</button>
+                <span style="flex: 1; font-size: 15px; font-weight: 600; color: {{ p.textColor }}; text-decoration: {{ p.deco }};">{{ p.label }}</span>
+                <button aria-label="Delete item" onClick="{{ p.remove }}" style="flex: none; display: grid; place-items: center; width: 28px; height: 28px; border: 2px solid rgba(0,0,0,0.25); border-radius: 4px; background: #F5F5F0; color: rgba(0,0,0,0.45); font-size: 11px; cursor: pointer;">✕</button>
+              </div>
+            </sc-for>
+          </div>
+
+          <div style="display: flex; gap: 10px;">
+            <input value="{{ packNew }}" onChange="{{ onPackNew }}" placeholder="Extra pasalubong space" aria-label="New packing item" style="flex: 1; height: 46px; box-sizing: border-box; border: 2px solid rgba(0,0,0,0.8); border-radius: 6px; background: #FFFFFF; padding: 0 12px; font-size: 15px; color: #171717;">
+            <button onClick="{{ addPack }}" style="width: 90px; height: 46px; border: 2px solid #6EE7B7; border-radius: 6px; background: #10B981; color: #fff; font-family: 'Press Start 2P', monospace; font-size: 9px; box-shadow: 3px 3px 0 rgba(0,0,0,0.4); cursor: pointer;" style-active="transform: translate(2px,2px); box-shadow: 1px 1px 0 rgba(0,0,0,0.4);">ADD +</button>
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- bottom nav -->
+      <div style="position: sticky; bottom: 0; display: flex; border-top: 2px solid rgba(0,0,0,0.8); background: #171717; padding: 8px 8px 10px;">
+        <button onClick="{{ goDays }}" style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 5px; padding: 7px 0; border: none; background: transparent; color: {{ navDays }}; cursor: pointer;">
+          <svg viewBox="0 0 16 16" style="width: 20px; height: 20px;" shape-rendering="crispEdges" aria-hidden="true"><rect x="2" y="3" width="12" height="11" fill="currentColor"></rect><rect x="3" y="6" width="10" height="7" fill="#171717"></rect><rect x="4" y="1" width="2" height="3" fill="currentColor"></rect><rect x="10" y="1" width="2" height="3" fill="currentColor"></rect><rect x="4" y="8" width="2" height="2" fill="currentColor"></rect><rect x="7" y="8" width="2" height="2" fill="currentColor"></rect></svg>
+          <span style="font-family: 'Press Start 2P', monospace; font-size: 6.5px;">DAYS</span>
+        </button>
+        <button onClick="{{ goMap }}" style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 5px; padding: 7px 0; border: none; background: transparent; color: {{ navMap }}; cursor: pointer;">
+          <svg viewBox="0 0 16 16" style="width: 20px; height: 20px;" shape-rendering="crispEdges" aria-hidden="true"><rect x="2" y="2" width="12" height="12" fill="currentColor"></rect><rect x="3" y="3" width="4" height="4" fill="#171717"></rect><rect x="9" y="9" width="4" height="4" fill="#171717"></rect><rect x="7" y="7" width="2" height="2" fill="#171717"></rect></svg>
+          <span style="font-family: 'Press Start 2P', monospace; font-size: 6.5px;">MAP</span>
+        </button>
+        <button onClick="{{ goFunds }}" style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 5px; padding: 7px 0; border: none; background: transparent; color: {{ navFunds }}; cursor: pointer;">
+          <svg viewBox="0 0 16 16" style="width: 20px; height: 20px;" shape-rendering="crispEdges" aria-hidden="true"><rect x="2" y="5" width="12" height="8" fill="currentColor"></rect><rect x="3" y="3" width="10" height="2" fill="currentColor"></rect><rect x="10" y="7" width="4" height="4" fill="#171717"></rect></svg>
+          <span style="font-family: 'Press Start 2P', monospace; font-size: 6.5px;">FUNDS</span>
+        </button>
+        <button onClick="{{ goPack }}" style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 5px; padding: 7px 0; border: none; background: transparent; color: {{ navPack }}; cursor: pointer;">
+          <svg viewBox="0 0 16 16" style="width: 20px; height: 20px;" shape-rendering="crispEdges" aria-hidden="true"><rect x="4" y="5" width="8" height="9" fill="currentColor"></rect><rect x="5" y="2" width="6" height="3" fill="currentColor"></rect><rect x="6" y="8" width="4" height="3" fill="#171717"></rect></svg>
+          <span style="font-family: 'Press Start 2P', monospace; font-size: 6.5px;">PACK</span>
+        </button>
+      </div>
+    </div>
+  </sc-if>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;skipLanding&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: false, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Behavior&quot; },
+  &quot;scanlines&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: false, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Style&quot; }
+}">
+const KEY = "suroy-suroy-retro-v1";
+
+function seed() {
+  const S = (time, title, note) => ({ id: Math.random().toString(36).slice(2), time, title, note });
+  return {
+    v: 1,
+    trips: [
+      {
+        id: "demo-cebu-bohol",
+        name: "Cebu & Bohol",
+        start: "2026-03-12",
+        budget: 15000,
+        days: [
+          { place: "Cebu City", stops: [
+            S("09:00", "Basilica del Santo Niño", "Oldest church in the country. Candles for the lolas."),
+            S("10:30", "Magellan's Cross", "Two minutes on foot. Free entry."),
+            S("12:00", "Rico's Lechon", "The spicy one. ₱450 logged to food."),
+            S("16:30", "Tops Lookout", "Sunset over the city. Bring a jacket."),
+          ]},
+          { place: "Moalboal", stops: [
+            S("07:00", "Kawasan canyoneering", "Full course from Alegria. ₱1,500 with gear."),
+            S("14:00", "Sardine run snorkel", "Right off Panagsama Beach. Free with own mask."),
+            S("17:30", "White Beach sunset", "Halo-halo stand near the south end."),
+          ]},
+          { place: "Ferry to Bohol", stops: [
+            S("09:20", "OceanJet to Tagbilaran", "Pier 1. Book the day before. ₱800."),
+            S("13:00", "Check in, Panglao", "Bike rental next door, ₱350 a day."),
+            S("16:00", "Alona Beach walk", "Cheaper mango shakes on the east path."),
+          ]},
+          { place: "Bohol countryside", stops: [
+            S("08:00", "Chocolate Hills", "Viewpoint entry ₱100. Go early, less haze."),
+            S("10:30", "Tarsier sanctuary", "Corella, the ethical one. Quiet voices."),
+            S("12:30", "Loboc river lunch", "Buffet boat, ₱850. Bring cash."),
+          ]},
+          { place: "Panglao, last day", stops: [
+            S("09:00", "Pasalubong run", "Peanut kisses and calamay at the public market."),
+            S("15:40", "Flight home", "TAG airport, be there by 14:00."),
+          ]},
+        ],
+        expenses: [
+          { id: "e1", label: "OceanJet ferry", amount: 800, cat: "TRANSPO" },
+          { id: "e2", label: "Rico's Lechon", amount: 450, cat: "FOOD" },
+          { id: "e3", label: "Canyoneering", amount: 1500, cat: "FUN" },
+          { id: "e4", label: "Panglao room deposit", amount: 2600, cat: "LODGING" },
+          { id: "e5", label: "Peanut kisses stash", amount: 500, cat: "PASALUBONG" },
+        ],
+        packing: [
+          { id: "p1", label: "Swimsuit x2", done: true },
+          { id: "p2", label: "Reef-safe sunscreen", done: true },
+          { id: "p3", label: "Dry bag", done: false },
+          { id: "p4", label: "GoPro + spare battery", done: false },
+          { id: "p5", label: "Powerbank", done: true },
+          { id: "p6", label: "Slippers", done: false },
+          { id: "p7", label: "Motion sickness meds", done: false },
+        ],
+      },
+    ],
+  };
+}
+
+const TPL = {
+  beach: ["Swimsuit", "Rash guard", "Snorkel mask", "Beach towel", "Waterproof phone pouch"],
+  hike: ["Trail shoes", "Refillable water bottle", "Bug spray", "First aid kit", "Headlamp"],
+  city: ["Comfy walking shoes", "Light jacket", "Coin purse for jeeps", "Umbrella"],
+};
+
+const CAT_STYLE = {
+  FOOD: { bg: "#FEF3C7", ink: "#92400E" },
+  TRANSPO: { bg: "#E0F2FE", ink: "#075985" },
+  LODGING: { bg: "#EDE9FE", ink: "#5B21B6" },
+  FUN: { bg: "#D1FAE5", ink: "#065F46" },
+  PASALUBONG: { bg: "#FFE4E6", ink: "#9F1239" },
+};
+
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    let data;
+    try { data = JSON.parse(localStorage.getItem(KEY)); } catch (e) { data = null; }
+    if (!data || !Array.isArray(data.trips)) { data = seed(); localStorage.setItem(KEY, JSON.stringify(data)); }
+    this.state = {
+      data,
+      screen: (this.props.skipLanding ?? false) ? "trips" : "landing",
+      tripId: null, tab: "days", dayIx: 0,
+      newTripOpen: false, tripName: "", tripStart: "", tripDays: "3",
+      addStopOpen: false, stopTime: "", stopTitle: "", stopNote: "",
+      expLabel: "", expAmount: "", expCat: "FOOD",
+      packNew: "",
+    };
+  }
+
+  save(data) { localStorage.setItem(KEY, JSON.stringify(data)); }
+
+  mutate(fn) {
+    this.setState((s) => {
+      const data = JSON.parse(JSON.stringify(s.data));
+      fn(data);
+      this.save(data);
+      return { data };
+    });
+  }
+
+  trip() { return this.state.data.trips.find((t) => t.id === this.state.tripId); }
+
+  fmtTime(t) {
+    if (!t) return "";
+    const m = String(t).match(/^0?(\d+):(\d+)/);
+    return m ? m[1] + ":" + m[2] : t;
+  }
+
+  fmtDate(iso, plusDays) {
+    if (!iso) return null;
+    const d = new Date(iso + "T00:00:00");
+    if (isNaN(d)) return null;
+    d.setDate(d.getDate() + (plusDays || 0));
+    return d;
+  }
+
+  peso(n) { return "₱" + Number(n || 0).toLocaleString("en-PH"); }
+
+  renderVals() {
+    const st = this.state;
+    const trip = st.screen === "trip" ? this.trip() : null;
+
+    const vals = {
+      scanlines: this.props.scanlines ?? false,
+      isLanding: st.screen === "landing",
+      isTrips: st.screen === "trips",
+      isTrip: st.screen === "trip" && !!trip,
+      start: () => this.setState({ screen: "trips" }),
+      goLanding: () => this.setState({ screen: "landing" }),
+      goTrips: () => this.setState({ screen: "trips" }),
+      goDays: () => this.setState({ tab: "days" }),
+      goMap: () => this.setState({ tab: "map" }),
+      goFunds: () => this.setState({ tab: "funds" }),
+      goPack: () => this.setState({ tab: "pack" }),
+      // trips list
+      trips: st.data.trips.map((t) => {
+        const stops = t.days.reduce((n, d) => n + d.stops.length, 0);
+        const d0 = this.fmtDate(t.start, 0), d1 = this.fmtDate(t.start, t.days.length - 1);
+        const dates = d0 ? (d0.toLocaleDateString("en-US", { month: "short", day: "numeric" }) + "–" + d1.toLocaleDateString("en-US", { day: "numeric" })).toUpperCase() : "NO DATES YET";
+        return {
+          id: t.id, name: t.name,
+          meta: dates + " · " + t.days.length + " DAYS · " + stops + " STOPS",
+          open: () => this.setState({ screen: "trip", tripId: t.id, tab: "days", dayIx: 0 }),
+          remove: () => { if (confirm('Delete "' + t.name + '"? This cannot be undone.')) this.mutate((d) => { d.trips = d.trips.filter((x) => x.id !== t.id); }); },
+        };
+      }),
+      noTrips: st.data.trips.length === 0,
+      newTripOpen: st.newTripOpen,
+      newTripClosed: !st.newTripOpen,
+      toggleNewTrip: () => this.setState((s) => ({ newTripOpen: !s.newTripOpen })),
+      tripName: st.tripName, onTripName: (e) => this.setState({ tripName: e.target.value }),
+      tripStart: st.tripStart, onTripStart: (e) => this.setState({ tripStart: e.target.value }),
+      tripDays: st.tripDays, onTripDays: (e) => this.setState({ tripDays: e.target.value }),
+      submitTrip: () => {
+        const name = st.tripName.trim(); if (!name) return;
+        const n = Math.max(1, Math.min(30, parseInt(st.tripDays, 10) || 3));
+        const id = "t" + Date.now();
+        this.mutate((d) => {
+          d.trips.push({ id, name, start: st.tripStart || null, budget: 10000, days: Array.from({ length: n }, () => ({ place: "", stops: [] })), expenses: [], packing: [] });
+        });
+        this.setState({ newTripOpen: false, tripName: "", tripStart: "", tripDays: "3", screen: "trip", tripId: id, tab: "days", dayIx: 0 });
+      },
+    };
+
+    if (!trip) return vals;
+
+    const spent = trip.expenses.reduce((n, e) => n + Number(e.amount || 0), 0);
+    const left = Math.max(0, trip.budget - spent);
+    const frac = trip.budget > 0 ? left / trip.budget : 0;
+    const dayIx = Math.min(st.dayIx, trip.days.length - 1);
+    const day = trip.days[dayIx];
+    const stopsTotal = trip.days.reduce((n, d) => n + d.stops.length, 0);
+    const d0 = this.fmtDate(trip.start, 0), d1 = this.fmtDate(trip.start, trip.days.length - 1);
+
+    vals.tripTitle = trip.name.toUpperCase();
+    vals.tripMeta = (d0 ? d0.toLocaleDateString("en-US", { month: "short", day: "numeric" }) + " to " + d1.toLocaleDateString("en-US", { month: "short", day: "numeric" }) + " · " : "") + trip.days.length + " days · " + stopsTotal + " stops";
+    vals.remainingChip = this.peso(left) + " LEFT";
+    vals.tabDays = st.tab === "days";
+    vals.tabMap = st.tab === "map";
+    vals.tabFunds = st.tab === "funds";
+    vals.tabPack = st.tab === "pack";
+    vals.navDays = st.tab === "days" ? "#34D399" : "rgba(255,255,255,0.45)";
+    vals.navMap = st.tab === "map" ? "#34D399" : "rgba(255,255,255,0.45)";
+    vals.navFunds = st.tab === "funds" ? "#34D399" : "rgba(255,255,255,0.45)";
+    vals.navPack = st.tab === "pack" ? "#34D399" : "rgba(255,255,255,0.45)";
+
+    // day chips
+    vals.dayChips = trip.days.map((d, i) => {
+      const date = this.fmtDate(trip.start, i);
+      const active = i === dayIx;
+      return {
+        num: date ? String(date.getDate()) : String(i + 1),
+        sub: date ? date.toLocaleDateString("en-US", { weekday: "short" }).toUpperCase() : "DAY",
+        select: () => this.setState({ dayIx: i, addStopOpen: false }),
+        bg: active ? "#FEF3C7" : "#FFFFFF",
+        border: active ? "rgba(120,53,15,0.7)" : "rgba(0,0,0,0.2)",
+        shadow: active ? "2px 2px 0 rgba(0,0,0,0.35)" : "none",
+        subColor: active ? "#92400E" : "rgba(0,0,0,0.4)",
+        numColor: active ? "#171717" : "rgba(0,0,0,0.55)",
+      };
+    });
+
+    vals.dayTitle = "DAY " + (dayIx + 1) + (day.place ? " · " + day.place.toUpperCase() : "");
+    vals.renameDay = () => {
+      const place = prompt("Where is day " + (dayIx + 1) + "?", day.place || "");
+      if (place !== null) this.mutate((d) => { d.trips.find((t) => t.id === trip.id).days[dayIx].place = place.trim(); });
+    };
+
+    vals.stops = day.stops.map((s, i) => ({
+      title: s.title, note: s.note || "", time: this.fmtTime(s.time),
+      upColor: i === 0 ? "rgba(0,0,0,0.15)" : "#171717",
+      downColor: i === day.stops.length - 1 ? "rgba(0,0,0,0.15)" : "#171717",
+      up: () => { if (i > 0) this.mutate((d) => { const arr = d.trips.find((t) => t.id === trip.id).days[dayIx].stops; [arr[i - 1], arr[i]] = [arr[i], arr[i - 1]]; }); },
+      down: () => { if (i < day.stops.length - 1) this.mutate((d) => { const arr = d.trips.find((t) => t.id === trip.id).days[dayIx].stops; [arr[i + 1], arr[i]] = [arr[i], arr[i + 1]]; }); },
+      remove: () => { if (confirm('Remove "' + s.title + '"?')) this.mutate((d) => { const dd = d.trips.find((t) => t.id === trip.id).days[dayIx]; dd.stops = dd.stops.filter((x) => x.id !== s.id); }); },
+    }));
+    vals.noStops = day.stops.length === 0 && !st.addStopOpen;
+    vals.addStopOpen = st.addStopOpen;
+    vals.addStopClosed = !st.addStopOpen;
+    vals.toggleAddStop = () => this.setState((s) => ({ addStopOpen: !s.addStopOpen }));
+    vals.stopTime = st.stopTime; vals.onStopTime = (e) => this.setState({ stopTime: e.target.value });
+    vals.stopTitle = st.stopTitle; vals.onStopTitle = (e) => this.setState({ stopTitle: e.target.value });
+    vals.stopNote = st.stopNote; vals.onStopNote = (e) => this.setState({ stopNote: e.target.value });
+    vals.submitStop = () => {
+      const title = st.stopTitle.trim(); if (!title) return;
+      this.mutate((d) => { d.trips.find((t) => t.id === trip.id).days[dayIx].stops.push({ id: Math.random().toString(36).slice(2), time: st.stopTime, title, note: st.stopNote.trim() }); });
+      this.setState({ stopTime: "", stopTitle: "", stopNote: "", addStopOpen: false });
+    };
+
+    // map tab
+    const dots = ["#E4572E", "#F59E0B", "#10B981", "#0EA5E9", "#8B5CF6", "#EC4899", "#84CC16"];
+    vals.mapDays = trip.days.map((d, i) => ({
+      label: "DAY " + (i + 1) + (d.place ? " · " + d.place.toUpperCase() : ""),
+      count: d.stops.length + (d.stops.length === 1 ? " STOP" : " STOPS"),
+      dot: dots[i % dots.length],
+      bg: i === dayIx ? "#FFFDF3" : "#FFFFFF",
+      select: () => this.setState({ dayIx: i, tab: "days" }),
+    }));
+
+    // funds tab
+    vals.fundsLabel = this.peso(left) + " / " + this.peso(trip.budget);
+    const filled = Math.round(frac * 10);
+    vals.fundSegs = Array.from({ length: 10 }, (_, i) => ({ bg: i < filled ? (frac < 0.25 ? "#F87171" : frac < 0.5 ? "#FBBF24" : "#34D399") : "#404040" }));
+    vals.fundsMood = frac >= 0.5 ? "HEALTHY. LECHON APPROVED." : frac >= 0.25 ? "GETTING THIN. EASY ON THE PASALUBONG." : "CRITICAL! TIGHTEN THE BELT.";
+    vals.fundsMoodColor = frac >= 0.5 ? "rgba(255,255,255,0.4)" : frac >= 0.25 ? "#FBBF24" : "#F87171";
+    vals.editBudget = () => {
+      const v = prompt("Trip budget in ₱:", String(trip.budget));
+      const n = parseInt(v, 10);
+      if (v !== null && !isNaN(n) && n >= 0) this.mutate((d) => { d.trips.find((t) => t.id === trip.id).budget = n; });
+    };
+    vals.expenses = trip.expenses.map((e) => ({
+      label: e.label, amount: this.peso(e.amount), cat: e.cat,
+      catBg: (CAT_STYLE[e.cat] || CAT_STYLE.FOOD).bg, catInk: (CAT_STYLE[e.cat] || CAT_STYLE.FOOD).ink,
+      remove: () => this.mutate((d) => { const t = d.trips.find((t) => t.id === trip.id); t.expenses = t.expenses.filter((x) => x.id !== e.id); }),
+    }));
+    vals.expLabel = st.expLabel; vals.onExpLabel = (e) => this.setState({ expLabel: e.target.value });
+    vals.expAmount = st.expAmount; vals.onExpAmount = (e) => this.setState({ expAmount: e.target.value });
+    vals.expCat = st.expCat; vals.onExpCat = (e) => this.setState({ expCat: e.target.value });
+    vals.submitExpense = () => {
+      const label = st.expLabel.trim(); const amount = parseInt(st.expAmount, 10);
+      if (!label || isNaN(amount) || amount <= 0) return;
+      this.mutate((d) => { d.trips.find((t) => t.id === trip.id).expenses.push({ id: Math.random().toString(36).slice(2), label, amount, cat: st.expCat }); });
+      this.setState({ expLabel: "", expAmount: "" });
+    };
+
+    // pack tab
+    const done = trip.packing.filter((p) => p.done).length;
+    vals.packLabel = done + " / " + trip.packing.length;
+    const pfrac = trip.packing.length ? done / trip.packing.length : 0;
+    vals.packSegs = Array.from({ length: 8 }, (_, i) => ({ bg: i < Math.round(pfrac * 8) ? "#34D399" : "#404040" }));
+    vals.packItems = trip.packing.map((p) => ({
+      label: p.label, mark: p.done ? "✓" : "",
+      boxBg: p.done ? "#10B981" : "#FFFFFF",
+      textColor: p.done ? "rgba(0,0,0,0.4)" : "#171717",
+      deco: p.done ? "line-through" : "none",
+      toggle: () => this.mutate((d) => { const it = d.trips.find((t) => t.id === trip.id).packing.find((x) => x.id === p.id); it.done = !it.done; }),
+      remove: () => this.mutate((d) => { const t = d.trips.find((t) => t.id === trip.id); t.packing = t.packing.filter((x) => x.id !== p.id); }),
+    }));
+    vals.packNew = st.packNew; vals.onPackNew = (e) => this.setState({ packNew: e.target.value });
+    vals.addPack = () => {
+      const label = st.packNew.trim(); if (!label) return;
+      this.mutate((d) => { d.trips.find((t) => t.id === trip.id).packing.push({ id: Math.random().toString(36).slice(2), label, done: false }); });
+      this.setState({ packNew: "" });
+    };
+    const applyTpl = (list) => this.mutate((d) => {
+      const t = d.trips.find((t) => t.id === trip.id);
+      const have = new Set(t.packing.map((p) => p.label.toLowerCase()));
+      list.forEach((label) => { if (!have.has(label.toLowerCase())) t.packing.push({ id: Math.random().toString(36).slice(2), label, done: false }); });
+    });
+    vals.tplBeach = () => applyTpl(TPL.beach);
+    vals.tplHike = () => applyTpl(TPL.hike);
+    vals.tplCity = () => applyTpl(TPL.city);
+
+    return vals;
+  }
+}
+
+</script>
+</body>
+</html>

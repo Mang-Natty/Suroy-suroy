@@ -27,10 +27,13 @@ sibling of https://natty-devtravels.vercel.app (repo: Mang-Natty on GitHub).
   - Nominatim search: user-triggered only, never on keystroke without debounce.
   - OSRM demo routing: user-triggered ("Route this day" button), cache results in
     trip data, isolate in `lib/routing.ts` (swappable for OpenRouteService).
-- **Design system:** generated in M0 via the `ui-ux-pro-max` skill into
-  `design-system/MASTER.md` — consult it before building UI. Tropical/fresh
-  modern, NOT the portfolio's retro pixel style. **Light-only** in v1;
-  **mobile-first** always (build for ~375px, enhance upward).
+- **Design system:** `design-system/MASTER.md` (v2, 2026-07-05) — consult it
+  before building UI. **Vintage PH travel-poster retro**: cream paper, 2px ink
+  outlines, hard offset shadows, coral-deep primary, mango/sea accents, Alfa
+  Slab One display + Plus Jakarta Sans body. NOT the portfolio's pixel 2-bit
+  (no Press Start 2P, no emerald-on-dark). **Light-only** in v1;
+  **mobile-first** always (build for ~375px, enhance upward). Claude Design
+  explorations archived in `design-import/` (reference, not gospel).
 - **Verify:** `npm run build` must pass before handing anything over for a push.
 
 ## Pinned versions & gotchas (verified 2026-07 against node_modules)

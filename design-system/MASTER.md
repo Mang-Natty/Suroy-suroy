@@ -1,112 +1,123 @@
-# Suroy-Suroy Design System — MASTER
+# Suroy-Suroy Design System — MASTER (v2 · vintage travel poster)
 
 > Global source of truth for all UI. Page-specific overrides live in
 > `design-system/pages/<page>.md` and take precedence when present.
-> Authored in M0 following the ui-ux-pro-max rule set (the skill's script
-> assets were unavailable; rules applied manually — contrast, touch targets,
-> mobile-first, semantic tokens).
+> **v2 (2026-07-05):** owner overturned the original "tropical modern" call in
+> favor of **retro — vintage PH travel poster**. Chosen over "jeepney pop" and
+> over the Claude Design "Retro App" exploration (rejected: Press Start 2P +
+> emerald = the portfolio's identity; see `design-import/`).
 
 ## Identity
 
 - **Product:** light, local-first, Philippines-first travel planner.
-- **Personality:** tropical, friendly, joyful — "tara, suroy ta!" energy.
-  Copy may sprinkle Cebuano/Filipino phrases (always with enough context to
-  stay understandable).
-- **Explicitly NOT:** pixel/retro (that's the portfolio's language), corporate
-  gray, dark/moody. **Light-only in v1. Mobile-first always.**
+- **Personality:** 1970s Philippine tourism poster — warm, sunny, hand-made,
+  proudly local. "Tara, suroy ta!" energy. Cebuano/Filipino microcopy welcome
+  (with enough context to stay understandable).
+- **Explicitly NOT:** the portfolio's 2-bit pixel retro (no pixel fonts, no
+  emerald-on-dark, no game chrome), and not corporate flat either.
+  **Light-only in v1. Mobile-first always.**
 
 ## Style
 
-**Fresh tropical modern** — airy layouts, rounded geometry, soft tinted
-shadows, generous whitespace. Think a clean beach morning, not a neon party.
+**Vintage travel poster** — cream paper, deep-sea ink outlines, sunset coral
+and mango, sticker badges, hard offset shadows (no blur — print, not glow).
 
-- Corners: cards `16px` (`rounded-2xl`), inputs/buttons pill or `12px`,
-  hero art `24px`. Nothing sharp-cornered.
-- Shadows: soft and sea-tinted, never harsh black.
-  Card: `0 4px 16px rgba(13, 148, 136, 0.10)`. One elevation scale, reuse it.
-- Surfaces: white cards on a faint sea-tinted page background; sections may
-  alternate white / `--color-sea-tint`.
-- Icons: **SVG only** (Lucide-style, 1.5–2px stroke, one family). Never emoji.
+- Corners: stay rounded (cards `12–16px`, buttons pill) — friendly, not brutal.
+- Outlines: key surfaces (cards, buttons, badges, icon chips) get a **2px ink
+  border**. Ink is the outline color everywhere; never gray borders on cards.
+- Shadows: **hard offset, zero blur** — `4px 4px 0 ink` (or sea for variety).
+  Pressed state = element translates 2px toward the shadow, shadow shrinks.
+- Paper: page background is warm cream; cards are lighter warm white. No pure
+  gray anywhere — warmth is the point.
+- Stickers: badges may rotate ±2° for the hand-placed look. Max one rotated
+  element per view.
+- Icons: **SVG only** (Lucide-style, 1.8–2px stroke, one family). Never emoji.
 
-## Color tokens (light-only, WCAG-checked)
+## Color tokens (light-only, WCAG-checked on cream)
 
-Define as CSS variables in `app/globals.css` `@theme`; components use
-semantic Tailwind classes, never raw hex.
+Defined in `app/globals.css` `@theme`; components use semantic utilities
+(`bg-paper`, `text-ink`…), never raw hex.
 
 | Token | Hex | Role | Contrast notes |
 |---|---|---|---|
-| `--color-sea` | `#0F766E` | **Primary** — CTAs, links, active states | 5.3:1 on white → AA text ✓ |
-| `--color-sea-deep` | `#115E59` | Primary hover/pressed | 6.9:1 ✓ |
-| `--color-sea-ink` | `#134E4A` | Headings, emphasis | 8.8:1 ✓ |
-| `--color-sea-soft` | `#CCFBF1` | Selected/badge fills, icon chips | bg only |
-| `--color-sea-tint` | `#F0FDFA` | Page/section tint background | bg only |
-| `--color-sun` | `#F59E0B` | Warm accent — highlights, illustration, progress | **never text on white** |
-| `--color-sun-ink` | `#92400E` | Text on sun-tinted fills | 4.6:1 on `#FEF3C7` ✓ |
-| `--color-sand` | `#FEF3C7` | Warm secondary fill (badges, callouts) | bg only |
-| `--color-ink` | `#134E4A` | Display/heading text | see above |
-| `--color-body` | `#334155` | Body text (slate-700) | 7.6:1 ✓ |
-| `--color-muted` | `#64748B` | Secondary text (slate-500) | 4.8:1 ✓ — minimum, no lighter |
-| `--color-line` | `#E2E8F0` | Borders, dividers | |
-| `--color-success` | `#059669` | Success (emerald-600) | pair with icon/text, not color alone |
-| `--color-danger` | `#E11D48` | Errors, destructive (rose-600) | 4.5:1 ✓ |
+| `--color-paper` | `#FFF4E0` | Page background | bg only |
+| `--color-card` | `#FFFDF7` | Card/surface background | bg only |
+| `--color-ink` | `#123F3A` | Headings, outlines, poster shadows | 10.6:1 on paper ✓ |
+| `--color-body` | `#44403C` | Body text | 8.9:1 on paper ✓ |
+| `--color-muted` | `#57534E` | Secondary text | 6.5:1 ✓ — minimum tier |
+| `--color-coral` | `#E4572E` | **Decorative only** — illustration, big display accents | fails AA as text (3.3:1) — never body/button text |
+| `--color-coral-deep` | `#C2410C` | **Primary action** fill + coral text | white on it 5.2:1 ✓; as text on paper 4.7:1 ✓ |
+| `--color-coral-press` | `#9A3412` | Primary hover/pressed | ✓ |
+| `--color-sea` | `#0F766E` | Secondary accent, links, alt shadows | 5.0:1 on paper ✓ |
+| `--color-sea-deep` | `#115E59` | Sea hover | ✓ |
+| `--color-sea-soft` | `#CCFBF1` | Cool fills (icon chips) | bg only, pair with ink |
+| `--color-mango` | `#F2A93B` | Warm fills — badges, progress, highlights | bg only, pair with ink |
+| `--color-sand` | `#FEF3C7` | Soft warm fill | bg only |
+| `--color-sun-ink` | `#92400E` | Text on mango/sand fills | 4.6:1 on sand ✓ |
+| `--color-line` | `#E5D5B8` | Hairline dividers (footer, tables) | decorative |
+| `--color-success` | `#059669` | Success | with icon/text, never color alone |
+| `--color-danger` | `#BE123C` | Errors, destructive | 5.9:1 on paper ✓ |
 
-Rules: primary action per screen is **sea**, exactly one. Sun is seasoning,
-not the main dish (icons, accents, the budget bar can go sun→rose as funds
-drop). Never gray-on-gray; never sun-on-white text.
+Shadow tokens: `--shadow-poster: 4px 4px 0 0 #123F3A`,
+`--shadow-poster-sea: 4px 4px 0 0 #0F766E`.
+
+Rules: one coral-deep primary action per screen. Mango and bright coral are
+seasoning (fills/illustration), never text on light. The budget bar may run
+mango → coral as funds drop (with labels, not color alone).
 
 ## Typography
 
-- **Single family: Plus Jakarta Sans** (Google, variable) via `next/font` —
-  friendly geometric, loads fast, one font = mobile-first performance.
-  Expose as `--font-sans`.
-- Weights: 800 display, 700 headings, 600 buttons/labels, 400 body.
-- Scale (px): 12 (fine print only) · 14 (labels) · **16 body — never smaller
-  on mobile** · 18 lead · 24 h3 · 30 h2 · 36/44 h1 (mobile/desktop).
-- Body line-height 1.6; headings 1.15–1.25. Line length ≤ 65ch.
-- Numbers (₱ amounts, distances): `tabular-nums`.
+- **Display: Alfa Slab One** (Google, 400 only) via `next/font` as
+  `--font-display` — chunky slab, pure travel poster. Used for the wordmark,
+  page titles (h1/h2), big numbers. Often uppercase. Letter-spacing normal
+  (slabs are already loud).
+- **Body: Plus Jakarta Sans** as `--font-sans` — 400 body, 600 buttons/labels,
+  800 badges/emphasis.
+- Never set paragraphs in the slab; it's display-only.
+- Scale (px): 12 fine print · 14 labels · **16 body minimum on mobile** ·
+  18 lead · 24 h3 · 30 h2 · 36/48 h1 (mobile/desktop).
+- Body line-height 1.6; slab headings 1.1. Numbers (₱, km): `tabular-nums`.
 
 ## Layout & spacing (mobile-first)
 
-- Build for **375px first**; enhance with `sm:`/`md:`/`lg:`. Breakpoints:
-  375 / 768 / 1024 / 1440.
-- 4/8px spacing rhythm. Section vertical padding: 48px mobile → 80px desktop.
-- Container: `max-w-6xl` desktop; gutters `px-4` mobile → `px-8` desktop.
-- **Touch targets ≥ 44×44px** (`h-11` minimum; primary CTAs `h-12`+), ≥8px
-  between targets. Primary mobile CTA: full-width, thumb-reachable.
-- `min-h-dvh` not `100vh`. No horizontal scroll at 375px, ever.
-- Content stacks single-column on mobile; grids (`sm:grid-cols-2`,
-  `lg:grid-cols-4`) appear upward.
+- Build for **375px first**; enhance with `sm:`/`md:`/`lg:`. Breakpoints
+  375/768/1024/1440. Container `max-w-6xl`; gutters `px-4` → `px-8`.
+- 4/8px rhythm. Section padding 48px mobile → 80px desktop.
+- **Touch targets ≥ 44×44px** (`h-11` min; primary CTAs `h-12`), ≥8px apart.
+  Primary mobile CTA: full-width, thumb-reachable.
+- `min-h-dvh`, never `100vh`. No horizontal scroll at 375px, ever.
 
 ## Components
 
-- **Buttons:** pill (`rounded-full`), weight 600. Primary: sea bg / white
-  text / hover sea-deep. Secondary: white bg, `--color-line` border, sea-ink
-  text. All: visible focus ring (`focus-visible:ring-2 ring-offset-2`,
-  sea), pressed scale ~0.97, `touch-action: manipulation`.
-- **Cards:** white, `rounded-2xl`, soft shadow, `p-5`+. Hover (desktop only):
-  slight lift; never hover-only information.
-- **Inputs:** `h-11`+, visible label above (never placeholder-only), helper/
-  error text below the field, semantic `type=` for correct mobile keyboards.
-- **Empty states:** illustration/icon + one friendly Cebuano-flavored line +
-  one clear action. (e.g. "Wala pay plano? Tara, suroy ta!")
-- **Feedback:** loading state on any async button; toasts auto-dismiss 3–5s,
-  `aria-live="polite"`; confirm before destructive deletes.
+- **Buttons:** pill, 2px ink border, `--shadow-poster`. Primary: coral-deep bg
+  / paper-white text. Secondary: card bg / ink text. Hover: darker fill;
+  pressed/active: `translate(2px,2px)` + shadow to `2px 2px 0`. Visible focus
+  ring (`focus-visible:ring-2 ring-offset-2` ink). `touch-action: manipulation`.
+- **Cards:** card bg, 2px ink border, `rounded-2xl`, poster shadow, `p-5`+.
+- **Inputs:** `h-11`+, 2px ink border, card bg; visible label above (never
+  placeholder-only), helper/error below, semantic `type=` for mobile keyboards.
+- **Empty states:** icon in a mango sticker chip + friendly Cebuano line + one
+  clear action ("Wala pay plano? Tara, suroy ta!").
+- **Feedback:** loading state on async buttons; toasts 3–5s `aria-live="polite"`;
+  confirm destructive deletes.
 
 ## Motion
 
-- Micro-interactions 150–300ms, `ease-out` enter / `ease-in` exit; exits
-  shorter than enters. Animate `transform`/`opacity` only — no layout shift.
-- 1–2 animated elements per view; always honor `prefers-reduced-motion`.
+- 150–300ms, `ease-out` in / `ease-in` out; exits shorter. Transform/opacity
+  only. Pressed = translate toward shadow (the poster "push"). Honor
+  `prefers-reduced-motion`. 1–2 animated elements per view.
 
 ## Accessibility floor (non-negotiable)
 
-- Text contrast ≥ 4.5:1; UI glyphs ≥ 3:1. Keyboard reachable everything,
-  visible focus, alt text, `aria-label` on icon-only buttons, sequential
-  headings, color never the only signal.
+Text ≥ 4.5:1 (see table); UI glyphs ≥ 3:1. Keyboard everything, visible focus,
+alt text, `aria-label` on icon-only buttons, sequential headings, color never
+the only signal.
 
 ## Anti-patterns (reject in review)
 
-Emoji as icons · pixel/retro styling · dark theme creep (incl. leftover
-`prefers-color-scheme` blocks) · raw hex in components · placeholder-only
-labels · touch targets < 44px · hover-only affordances · `100vh` on mobile ·
-horizontal scroll at 375px · more than one primary CTA per screen.
+Pixel fonts / Press Start 2P / emerald-on-dark (portfolio's language) · emoji
+as icons · blurred/soft shadows (this system is hard-offset only) · bright
+coral `#E4572E` as text or button fill · gray borders on cards (ink or nothing)
+· slab font in body copy · more than one rotated sticker per view · dark theme
+creep · raw hex in components · placeholder-only labels · targets < 44px ·
+`100vh` · horizontal scroll at 375px · >1 primary CTA per screen.

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { margin: 0; background: #F0FDFA; color: #334155; font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; }
+    /* responsive overrides only — base styles are inline */
+    @media (min-width: 640px) {
+      .sy-hero { padding-top: 96px !important; }
+      .sy-h1 { font-size: 48px !important; }
+      .sy-tag { font-size: 20px !important; }
+      .sy-intro { font-size: 18px !important; }
+      .sy-cta { width: auto !important; }
+      .sy-features { padding-bottom: 96px !important; }
+      .sy-grid { grid-template-columns: repeat(2, 1fr) !important; }
+      .sy-foot { flex-direction: row !important; justify-content: space-between !important; }
+    }
+    @media (min-width: 1024px) {
+      .sy-grid { grid-template-columns: repeat(4, 1fr) !important; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+  </style>
+</helmet>
+
+<div style="display: flex; flex-direction: column; min-height: 100dvh;">
+  <main style="flex: 1;" data-screen-label="Landing">
+
+    <!-- Hero -->
+    <section class="sy-hero" style="margin: 0 auto; width: 100%; max-width: 1152px; box-sizing: border-box; padding: 64px 16px 48px;">
+      <div style="margin: 0 auto; max-width: 672px; text-align: center;">
+        <p style="display: inline-flex; align-items: center; gap: 8px; border-radius: 9999px; background: #CCFBF1; padding: 6px 16px; margin: 0; font-size: 14px; font-weight: 600; color: #134E4A;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width: 16px; height: 16px;">
+            <path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"></path>
+            <circle cx="12" cy="10" r="3"></circle>
+          </svg>
+          Philippines-first · no signup, ever
+        </p>
+        <h1 class="sy-h1" style="margin: 24px 0 0; font-size: 36px; font-weight: 800; letter-spacing: -0.025em; line-height: 1.15; color: #134E4A;">Suroy-Suroy</h1>
+        <p class="sy-tag" style="margin: 12px 0 0; font-size: 18px; font-weight: 600; color: #0F766E;">Plan the trip. Keep the joy.</p>
+        <p class="sy-intro" style="margin: 16px 0 0; font-size: 16px; line-height: 1.625; color: #334155;"><em>Suroy-suroy</em> is Cebuano for wandering around just for the fun of it. This is a light travel planner in that same spirit — your days, stops, routes, ₱ budget, and packing list in one page that lives entirely in your browser.</p>
+        <div style="margin-top: 32px;">
+          <a href="#" class="sy-cta"
+             style="display: inline-flex; box-sizing: border-box; height: 48px; width: 100%; align-items: center; justify-content: center; gap: 8px; border-radius: 9999px; background: #0F766E; padding: 0 32px; font-size: 16px; font-weight: 600; color: #FFFFFF; text-decoration: none; transition: background-color 200ms, transform 150ms; touch-action: manipulation;"
+             style-hover="background: #115E59;"
+             style-active="transform: scale(0.97);"
+             style-focus="outline: 2px solid #0F766E; outline-offset: 2px;">
+            Start planning
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width: 20px; height: 20px;">
+              <path d="M5 12h14m-6-6 6 6-6 6"></path>
+            </svg>
+          </a>
+          <p style="margin: 12px 0 0; font-size: 14px; color: #64748B;">{{ ctaSubtext }}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Feature cards -->
+    <section class="sy-features" style="margin: 0 auto; width: 100%; max-width: 1152px; box-sizing: border-box; padding: 0 16px 64px;">
+      <div class="sy-grid" style="display: grid; grid-template-columns: 1fr; gap: 16px;">
+        <sc-for list="{{ features }}" as="feature" hint-placeholder-count="4">
+          <div style="border-radius: 16px; background: #FFFFFF; padding: 20px; box-shadow: 0 4px 16px rgba(13, 148, 136, 0.10);">
+            <div style="display: flex; height: 44px; width: 44px; align-items: center; justify-content: center; border-radius: 9999px; background: {{ feature.chipBg }}; color: {{ feature.chipInk }};">
+              <span style="display: flex;">{{ feature.icon }}</span>
+            </div>
+            <h3 style="margin: 16px 0 0; font-size: 18px; font-weight: 700; color: #134E4A;">{{ feature.title }}</h3>
+            <p style="margin: 8px 0 0; font-size: 16px; line-height: 1.625; color: #334155;">{{ feature.body }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer style="border-top: 1px solid #E2E8F0; background: #FFFFFF;">
+    <div class="sy-foot" style="margin: 0 auto; display: flex; width: 100%; max-width: 1152px; flex-direction: column; align-items: center; gap: 8px; box-sizing: border-box; padding: 24px 16px; text-align: center; font-size: 14px; color: #64748B;">
+      <p style="margin: 0;">Built by <a href="https://natty-devtravels.vercel.app" style="font-weight: 600; color: #0F766E; text-decoration: none;" style-hover="text-decoration: underline; text-underline-offset: 4px;">nattydev</a></p>
+      <p style="margin: 0;">Local-first: no servers, no tracking, just your browser.</p>
+    </div>
+  </footer>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;cebuanoMicrocopy&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Copy&quot; },
+  &quot;sunAccents&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: false, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Style&quot; }
+}">
+class Component extends DCLogic {
+  icon(paths) {
+    return React.createElement(
+      "svg",
+      { viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: 1.8, strokeLinecap: "round", strokeLinejoin: "round", "aria-hidden": true, style: { width: 24, height: 24 } },
+      paths.map((d, i) => React.createElement("path", { key: i, d })),
+      this._extra || null
+    );
+  }
+
+  renderVals() {
+    const sunny = this.props.sunAccents ?? false;
+    const chip = (i) =>
+      sunny && i % 2 === 1
+        ? { chipBg: "#FEF3C7", chipInk: "#92400E" }
+        : { chipBg: "#CCFBF1", chipInk: "#134E4A" };
+
+    const svg = (children) =>
+      React.createElement(
+        "svg",
+        { viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: 1.8, strokeLinecap: "round", strokeLinejoin: "round", "aria-hidden": true, style: { width: 24, height: 24, display: "block" } },
+        children
+      );
+
+    const features = [
+      {
+        title: "Day-by-day itinerary",
+        body: "Turn a date range into days, drop in your stops, and shuffle them until the trip feels right.",
+        icon: svg([
+          React.createElement("rect", { key: "r", x: 3, y: 4, width: 18, height: 18, rx: 3 }),
+          React.createElement("path", { key: "p", d: "M16 2v4M8 2v4M3 10h18M8 15h2m4 0h2" }),
+        ]),
+        ...chip(0),
+      },
+      {
+        title: "Traveler map & routes",
+        body: "See every stop on a real map and trace the route between them — with distance and travel time.",
+        icon: svg([
+          React.createElement("path", { key: "a", d: "M9 3 3.6 5.2a1 1 0 0 0-.6.9v13.4a1 1 0 0 0 1.4.9L9 18.3l6 2.7 5.4-2.2a1 1 0 0 0 .6-.9V4.5a1 1 0 0 0-1.4-.9L15 5.7 9 3Z" }),
+          React.createElement("path", { key: "b", d: "M9 3v15.3M15 5.7V21" }),
+        ]),
+        ...chip(1),
+      },
+      {
+        title: "Budget in pesos",
+        body: "Set a trip budget, log the lechon and the tricycle rides, and watch the remaining-funds bar tell the truth.",
+        icon: svg([
+          React.createElement("path", { key: "a", d: "M19 7V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" }),
+          React.createElement("rect", { key: "b", x: 13, y: 9, width: 8, height: 6, rx: 2 }),
+          React.createElement("circle", { key: "c", cx: 16.5, cy: 12, r: 0.5, fill: "currentColor" }),
+        ]),
+        ...chip(2),
+      },
+      {
+        title: "Packing checklist",
+        body: "Beach, hike, or city templates plus your own must-brings — tick them off and forget nothing.",
+        icon: svg([
+          React.createElement("rect", { key: "a", x: 5, y: 7, width: 14, height: 14, rx: 3 }),
+          React.createElement("path", { key: "b", d: "M9 7V5a3 3 0 0 1 6 0v2M9.5 14.5l1.8 1.8 3.4-3.6" }),
+        ]),
+        ...chip(3),
+      },
+    ];
+
+    const cebuano = this.props.cebuanoMicrocopy ?? true;
+    const ctaSubtext = cebuano
+      ? "Free forever. No accounts — your plans stay on your device. Tara, suroy ta!"
+      : "Free forever. No accounts — your plans stay on your device.";
+
+    return { features, ctaSubtext };
+  }
+}
+
+</script>
+</body>
+</html>

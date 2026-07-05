@@ -27,7 +27,7 @@ architecture, not just by marketing: all data lives in the visitor's browser.
 | Flavor | Philippines-first: PH examples/seeds, Filipino personality in copy |
 | Maps | MapLibre GL + CARTO Voyager raster tiles (free, no key, attribution required) |
 | Routing | OSRM public demo server (free, no key) — swappable design |
-| Design | Fresh/tropical modern UI. Deliberately NOT the portfolio's retro 2-bit — a second visual language shows range |
+| Design | **v2 (owner call, 2026-07-05): retro — vintage PH travel poster** (cream paper, ink outlines, coral/mango/sea, slab display type). Still deliberately NOT the portfolio's retro 2-bit pixel style — a second visual language shows range. See `design-system/MASTER.md` |
 | Deploy | Vercel hobby, push-to-main deploys |
 
 ## Milestones
