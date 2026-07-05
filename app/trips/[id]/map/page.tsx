@@ -16,12 +16,14 @@ import {
 } from "@/lib/routing";
 import type { MapStop } from "@/components/TripMap";
 import BackLink from "@/components/BackLink";
+import Loader from "@/components/Loader";
+import Modal from "@/components/Modal";
 
 const TripMap = dynamic(() => import("@/components/TripMap"), {
   ssr: false,
   loading: () => (
-    <div className="flex h-[45dvh] min-h-72 w-full items-center justify-center rounded-2xl border-2 border-ink bg-sea-soft text-sm font-extrabold text-ink shadow-poster">
-      Loading the map…
+    <div className="flex h-[45dvh] min-h-72 w-full items-center justify-center rounded-2xl border-2 border-ink bg-sea-soft shadow-poster">
+      <Loader label="Unfolding the map…" className="py-0" />
     </div>
   ),
 });
@@ -55,6 +57,7 @@ export default function TripMapPage({
     name?: string;
     busy: boolean;
   } | null>(null);
+  const [confirmRemoveRoute, setConfirmRemoveRoute] = useState(false);
 
   useEffect(() => {
     const t = getTrip(id) ?? null;
@@ -67,7 +70,12 @@ export default function TripMapPage({
     [trip],
   );
 
-  if (trip === undefined) return null;
+  if (trip === undefined)
+    return (
+      <main className="flex flex-1 items-center justify-center">
+        <Loader />
+      </main>
+    );
   if (trip === null || !selectedDate) {
     return (
       <main className="mx-auto w-full max-w-xl flex-1 px-4 py-16 text-center sm:px-6">
@@ -212,6 +220,14 @@ export default function TripMapPage({
       .catch(() =>
         setPendingPin((p) => (p && p.lat === lat ? { ...p, busy: false } : p)),
       );
+  }
+
+  function removeRoute() {
+    if (!trip || !selectedDate) return;
+    const nextRoutes = { ...trip.routesByDate };
+    delete nextRoutes[selectedDate];
+    update({ ...trip, routesByDate: nextRoutes });
+    setConfirmRemoveRoute(false);
   }
 
   async function doRoute() {
@@ -412,10 +428,19 @@ export default function TripMapPage({
           </p>
         )}
         {cacheStale && (
-          <p className="mt-3 text-sm font-semibold text-sun-ink">
-            Stops changed since this route was drawn — hit “Route this day”
-            to refresh it.
-          </p>
+          <div className="mt-3 flex flex-wrap items-center justify-between gap-2">
+            <p className="min-w-0 flex-1 text-sm font-semibold text-sun-ink">
+              Stops changed since this route was drawn — hit “Route this day”
+              to refresh it.
+            </p>
+            <button
+              type="button"
+              onClick={() => setConfirmRemoveRoute(true)}
+              className="inline-flex h-11 shrink-0 items-center justify-center rounded-full border-2 border-danger bg-card px-4 text-sm font-extrabold text-danger transition-colors hover:bg-danger hover:text-card focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-danger focus-visible:ring-offset-2"
+            >
+              Remove route
+            </button>
+          </div>
         )}
         {routeError && (
           <p role="alert" className="mt-3 text-sm font-semibold text-danger">
@@ -424,11 +449,20 @@ export default function TripMapPage({
         )}
         {cached && !cacheStale && (
           <div className="mt-3 border-t-2 border-line pt-3">
-            <p className="text-base font-extrabold text-ink">
-              {cached.profile === "driving" ? "Drive" : "Walk"} ·{" "}
-              <span className="tabular-nums">{formatDistance(cached.distanceM)}</span> ·{" "}
-              <span className="tabular-nums">{formatDuration(cached.durationS)}</span>
-            </p>
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <p className="text-base font-extrabold text-ink">
+                {cached.profile === "driving" ? "Drive" : "Walk"} ·{" "}
+                <span className="tabular-nums">{formatDistance(cached.distanceM)}</span> ·{" "}
+                <span className="tabular-nums">{formatDuration(cached.durationS)}</span>
+              </p>
+              <button
+                type="button"
+                onClick={() => setConfirmRemoveRoute(true)}
+                className="inline-flex h-11 items-center justify-center rounded-full border-2 border-danger bg-card px-4 text-sm font-extrabold text-danger transition-colors hover:bg-danger hover:text-card focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-danger focus-visible:ring-offset-2"
+              >
+                Remove route
+              </button>
+            </div>
             {cached.legs.length > 1 && (
               <ol className="mt-2 space-y-1">
                 {cached.legs.map((leg, i) => (
@@ -572,6 +606,16 @@ export default function TripMapPage({
           trip.
         </p>
       </section>
+
+      <Modal
+        open={confirmRemoveRoute}
+        title="Remove this day's route?"
+        body="The drawn line and its distance info will be cleared. Your stops stay exactly where they are — you can route the day again anytime."
+        confirmLabel="Remove route"
+        danger
+        onConfirm={removeRoute}
+        onClose={() => setConfirmRemoveRoute(false)}
+      />
     </main>
   );
 }

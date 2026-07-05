@@ -8,6 +8,7 @@ import { dateRange, formatDay, formatRange } from "@/lib/dates";
 import { TripCover } from "@/components/covers";
 import DayStops from "@/components/DayStops";
 import BackLink from "@/components/BackLink";
+import Loader from "@/components/Loader";
 
 export default function TripPlanPage({
   params,
@@ -30,7 +31,12 @@ export default function TripPlanPage({
     setTrip(saveTrip(next));
   }
 
-  if (trip === undefined) return null;
+  if (trip === undefined)
+    return (
+      <main className="flex flex-1 items-center justify-center">
+        <Loader />
+      </main>
+    );
 
   if (trip === null) {
     return (
@@ -69,19 +75,39 @@ export default function TripPlanPage({
             </p>
           </div>
         </div>
-        <div className="mt-4 flex gap-2 border-t-2 border-line pt-4">
+        <div className="mt-4 grid grid-cols-2 gap-2 border-t-2 border-line pt-4">
           <Link
             href={`/trips/${trip.id}/map`}
-            className="inline-flex h-11 flex-1 items-center justify-center gap-2 rounded-full border-2 border-ink bg-sea px-4 text-sm font-extrabold text-card shadow-poster-sm transition-colors hover:bg-sea-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2"
+            className="inline-flex h-11 items-center justify-center gap-2 rounded-full border-2 border-ink bg-sea px-4 text-sm font-extrabold text-card shadow-poster-sm transition-colors hover:bg-sea-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2"
           >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="h-4 w-4">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="h-4 w-4 shrink-0">
               <path d="M9 3 3.6 5.2a1 1 0 0 0-.6.9v13.4a1 1 0 0 0 1.4.9L9 18.3l6 2.7 5.4-2.2a1 1 0 0 0 .6-.9V4.5a1 1 0 0 0-1.4-.9L15 5.7 9 3Z" />
             </svg>
             Map & routes
           </Link>
           <Link
+            href={`/trips/${trip.id}/budget`}
+            className="inline-flex h-11 items-center justify-center gap-2 rounded-full border-2 border-ink bg-mango px-4 text-sm font-extrabold text-ink shadow-poster-sm transition-colors hover:bg-sand focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="h-4 w-4 shrink-0">
+              <path d="M19 7V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" />
+              <rect x="13" y="9" width="8" height="6" rx="2" />
+            </svg>
+            ₱ Budget
+          </Link>
+          <Link
+            href={`/trips/${trip.id}/packing`}
+            className="inline-flex h-11 items-center justify-center gap-2 rounded-full border-2 border-ink bg-sea-soft px-4 text-sm font-extrabold text-ink shadow-poster-sm transition-colors hover:bg-sea hover:text-card focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="h-4 w-4 shrink-0">
+              <rect x="5" y="7" width="14" height="14" rx="3" />
+              <path d="M9 7V5a3 3 0 0 1 6 0v2M9.5 14.5l1.8 1.8 3.4-3.6" />
+            </svg>
+            Packing
+          </Link>
+          <Link
             href={`/trips/${trip.id}/edit`}
-            className="inline-flex h-11 items-center justify-center rounded-full border-2 border-ink bg-card px-5 text-sm font-extrabold text-ink hover:bg-sand focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2"
+            className="inline-flex h-11 items-center justify-center rounded-full border-2 border-ink bg-card px-4 text-sm font-extrabold text-ink hover:bg-sand focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2"
           >
             Edit
           </Link>

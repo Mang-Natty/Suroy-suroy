@@ -6,6 +6,7 @@ import type { Trip } from "@/lib/types";
 import { getTrip } from "@/lib/storage";
 import TripForm from "@/components/TripForm";
 import BackLink from "@/components/BackLink";
+import Loader from "@/components/Loader";
 
 export default function EditTripPage({
   params,
@@ -19,7 +20,12 @@ export default function EditTripPage({
     setTrip(getTrip(id) ?? null);
   }, [id]);
 
-  if (trip === undefined) return null;
+  if (trip === undefined)
+    return (
+      <main className="flex flex-1 items-center justify-center">
+        <Loader />
+      </main>
+    );
 
   if (trip === null) {
     return (

@@ -43,6 +43,28 @@ export type CoverIcon =
   | "backpack"
   | "plane";
 
+export type ExpenseCategory =
+  | "food"
+  | "transpo"
+  | "lodging"
+  | "activities"
+  | "pasalubong";
+
+export type Expense = {
+  id: string;
+  category: ExpenseCategory;
+  /** Whole pesos */
+  amount: number;
+  note?: string;
+  createdAt: string;
+};
+
+export type PackingItem = {
+  id: string;
+  label: string;
+  done: boolean;
+};
+
 export type Trip = {
   id: string;
   name: string;
@@ -56,6 +78,11 @@ export type Trip = {
   stopsByDate: Record<string, Stop[]>;
   /** Cached OSRM results keyed by "YYYY-MM-DD" (M2) */
   routesByDate: Record<string, DayRoute>;
+  /** M3 — whole-peso trip fund; optional so pre-M3 stored trips stay valid */
+  budgetTotal?: number;
+  expenses?: Expense[];
+  /** M4 — optional for the same backward-compat reason */
+  packing?: PackingItem[];
   createdAt: string;
   updatedAt: string;
 };
