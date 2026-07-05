@@ -37,6 +37,11 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+/* Placeholders must read as hints, not typed text */
+::placeholder {
+  opacity: 0.55;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
