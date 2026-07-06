@@ -1,50 +1,25 @@
 import Link from "next/link";
 
-const features = [
+const howItWorks = [
   {
-    title: "Day-by-day itinerary",
-    body: "Turn a date range into days, drop in your stops, and shuffle them until the trip feels right.",
-    chip: "bg-sea-soft text-ink",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="h-6 w-6">
-        <rect x="3" y="4" width="18" height="18" rx="3" />
-        <path d="M16 2v4M8 2v4M3 10h18M8 15h2m4 0h2" />
-      </svg>
-    ),
+    step: 1,
+    title: "Name your trip",
+    body: "Pick a name, dates, and a vibe. Your trip gets a sticker. That's it.",
   },
   {
-    title: "Traveler map & routes",
-    body: "See every stop on a real map and trace the route between them, with distance and travel time.",
-    chip: "bg-mango text-ink",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="h-6 w-6">
-        <path d="M9 3 3.6 5.2a1 1 0 0 0-.6.9v13.4a1 1 0 0 0 1.4.9L9 18.3l6 2.7 5.4-2.2a1 1 0 0 0 .6-.9V4.5a1 1 0 0 0-1.4-.9L15 5.7 9 3Z" />
-        <path d="M9 3v15.3M15 5.7V21" />
-      </svg>
-    ),
+    step: 2,
+    title: "Add stops day-by-day",
+    body: "Search for cafés, inns, falls, or just tap the map. Every stop lands in your itinerary.",
   },
   {
-    title: "Budget in pesos",
-    body: "Set a trip budget, log the lechon and the tricycle rides, and watch the remaining-funds bar tell the truth.",
-    chip: "bg-sea-soft text-ink",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="h-6 w-6">
-        <path d="M19 7V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" />
-        <rect x="13" y="9" width="8" height="6" rx="2" />
-        <circle cx="16.5" cy="12" r="0.5" fill="currentColor" />
-      </svg>
-    ),
+    step: 3,
+    title: "Track your budget",
+    body: "Set a peso fund. Log the lechon, the tricycle rides, the pasalubong. Watch it drain.",
   },
   {
-    title: "Packing checklist",
-    body: "Beach, hike, or city templates plus your own must-brings. Tick them off and forget nothing.",
-    chip: "bg-mango text-ink",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="h-6 w-6">
-        <rect x="5" y="7" width="14" height="14" rx="3" />
-        <path d="M9 7V5a3 3 0 0 1 6 0v2M9.5 14.5l1.8 1.8 3.4-3.6" />
-      </svg>
-    ),
+    step: 4,
+    title: "Pack and backup",
+    body: "Use templates or add your own items. Export your whole trip as JSON whenever you like.",
   },
 ];
 
@@ -93,22 +68,152 @@ export default function Home() {
         </section>
 
         <section className="mx-auto w-full max-w-6xl px-4 pb-16 sm:px-6 sm:pb-24 lg:px-8">
-          <h2 className="sr-only">What Suroy-Suroy does</h2>
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {features.map((feature, i) => (
-              <div
-                key={feature.title}
-                className={`rounded-2xl border-2 border-ink bg-card p-5 ${i % 2 === 1 ? "shadow-poster-sea" : "shadow-poster"}`}
-              >
-                <div className={`flex h-11 w-11 items-center justify-center rounded-full border-2 border-ink ${feature.chip}`}>
-                  {feature.icon}
+          <h2 className="mb-12 text-center font-display text-3xl text-ink sm:text-4xl">
+            How it works
+          </h2>
+          <div className="space-y-12">
+            {howItWorks.map((item, i) => (
+              <div key={item.step} className="grid items-center gap-8 md:grid-cols-2">
+                {/* Alternate layout: image on left/right */}
+                <div className={item.step % 2 === 0 ? "md:order-2" : ""}>
+                  {/* SVG Mockup based on step */}
+                  <div className="rounded-2xl border-2 border-ink bg-card p-6 shadow-poster">
+                    {item.step === 1 && (
+                      <svg viewBox="0 0 280 320" className="w-full" aria-hidden="true">
+                        {/* Trip form mockup */}
+                        <rect x="10" y="10" width="260" height="300" fill="#FFF4E0" stroke="#123F3A" strokeWidth="2" rx="12" />
+                        {/* Name input */}
+                        <text x="20" y="35" fontSize="12" fontWeight="bold" fill="#123F3A">Trip name</text>
+                        <rect x="20" y="42" width="240" height="28" fill="#E8E8E8" stroke="#123F3A" strokeWidth="2" rx="6" />
+                        <text x="30" y="63" fontSize="13" fill="#999">Siargao trip</text>
+                        {/* Date inputs */}
+                        <text x="20" y="90" fontSize="12" fontWeight="bold" fill="#123F3A">Dates</text>
+                        <rect x="20" y="97" width="110" height="28" fill="#E8E8E8" stroke="#123F3A" strokeWidth="2" rx="6" />
+                        <text x="30" y="117" fontSize="11" fill="#666">Aug 10</text>
+                        <rect x="150" y="97" width="110" height="28" fill="#E8E8E8" stroke="#123F3A" strokeWidth="2" rx="6" />
+                        <text x="160" y="117" fontSize="11" fill="#666">Aug 14</text>
+                        {/* Vibe buttons */}
+                        <text x="20" y="155" fontSize="12" fontWeight="bold" fill="#123F3A">Vibe</text>
+                        <g>
+                          <rect x="20" y="162" width="50" height="50" fill="#0F766E" stroke="#123F3A" strokeWidth="2" rx="8" />
+                          <text x="45" y="196" fontSize="11" fontWeight="bold" fill="#FFF4E0" textAnchor="middle">Beach</text>
+                          <rect x="80" y="162" width="50" height="50" fill="none" stroke="#123F3A" strokeWidth="2" rx="8" />
+                          <text x="105" y="196" fontSize="11" fontWeight="bold" fill="#123F3A" textAnchor="middle">Hike</text>
+                          <rect x="140" y="162" width="50" height="50" fill="none" stroke="#123F3A" strokeWidth="2" rx="8" />
+                          <text x="165" y="196" fontSize="11" fontWeight="bold" fill="#123F3A" textAnchor="middle">City</text>
+                          <rect x="200" y="162" width="50" height="50" fill="none" stroke="#123F3A" strokeWidth="2" rx="8" />
+                          <text x="225" y="196" fontSize="11" fontWeight="bold" fill="#123F3A" textAnchor="middle">Food</text>
+                        </g>
+                        {/* Create button */}
+                        <rect x="20" y="230" width="240" height="40" fill="#C2410C" stroke="#123F3A" strokeWidth="2" rx="20" />
+                        <text x="140" y="258" fontSize="14" fontWeight="bold" fill="#FFF4E0" textAnchor="middle">Create trip</text>
+                      </svg>
+                    )}
+                    {item.step === 2 && (
+                      <svg viewBox="0 0 280 320" className="w-full" aria-hidden="true">
+                        {/* Map + stops mockup */}
+                        <rect x="10" y="10" width="260" height="300" fill="#FFF4E0" stroke="#123F3A" strokeWidth="2" rx="12" />
+                        {/* Mini map */}
+                        <rect x="20" y="20" width="150" height="160" fill="#E0F2F1" stroke="#123F3A" strokeWidth="2" rx="8" />
+                        {/* Pins on map */}
+                        <circle cx="55" cy="60" r="6" fill="#F2A93B" stroke="#123F3A" strokeWidth="1.5" />
+                        <circle cx="95" cy="90" r="6" fill="#F2A93B" stroke="#123F3A" strokeWidth="1.5" />
+                        <circle cx="130" cy="120" r="6" fill="#F2A93B" stroke="#123F3A" strokeWidth="1.5" />
+                        {/* Stops list on right */}
+                        <text x="185" y="35" fontSize="11" fontWeight="bold" fill="#123F3A">Stops</text>
+                        {/* Stop 1 */}
+                        <rect x="180" y="45" width="90" height="35" fill="white" stroke="#123F3A" strokeWidth="1.5" rx="6" />
+                        <text x="188" y="62" fontSize="11" fontWeight="bold" fill="#123F3A">Siargao Town</text>
+                        <text x="188" y="75" fontSize="9" fill="#999">General Luna</text>
+                        {/* Stop 2 */}
+                        <rect x="180" y="85" width="90" height="35" fill="white" stroke="#123F3A" strokeWidth="1.5" rx="6" />
+                        <text x="188" y="102" fontSize="11" fontWeight="bold" fill="#123F3A">Cloud 9 Beach</text>
+                        <text x="188" y="115" fontSize="9" fill="#999">Siargao</text>
+                        {/* Stop 3 */}
+                        <rect x="180" y="125" width="90" height="35" fill="white" stroke="#123F3A" strokeWidth="1.5" rx="6" />
+                        <text x="188" y="142" fontSize="11" fontWeight="bold" fill="#123F3A">Pacifico Island</text>
+                        <text x="188" y="155" fontSize="9" fill="#999">Siargao</text>
+                        {/* Search input */}
+                        <rect x="20" y="190" width="250" height="30" fill="#E8E8E8" stroke="#123F3A" strokeWidth="2" rx="6" />
+                        <text x="30" y="211" fontSize="11" fill="#999">Search a spot.</text>
+                        {/* Add button */}
+                        <rect x="20" y="230" width="250" height="40" fill="#F2A93B" stroke="#123F3A" strokeWidth="2" rx="20" />
+                        <text x="145" y="258" fontSize="14" fontWeight="bold" fill="#123F3A" textAnchor="middle">Add stop</text>
+                      </svg>
+                    )}
+                    {item.step === 3 && (
+                      <svg viewBox="0 0 280 320" className="w-full" aria-hidden="true">
+                        {/* Budget + packing mockup */}
+                        <rect x="10" y="10" width="260" height="300" fill="#FFF4E0" stroke="#123F3A" strokeWidth="2" rx="12" />
+                        {/* Budget section */}
+                        <text x="20" y="35" fontSize="12" fontWeight="bold" fill="#123F3A">₱ Budget</text>
+                        <text x="20" y="55" fontSize="16" fontWeight="bold" fill="#123F3A">₱6,500</text>
+                        <text x="20" y="70" fontSize="10" fill="#999">spent ₱3,500 of ₱10,000</text>
+                        {/* Fund bar */}
+                        <rect x="20" y="78" width="240" height="16" fill="#E8E8E8" stroke="#123F3A" strokeWidth="1.5" rx="8" />
+                        <rect x="20" y="78" width="180" height="16" fill="#0F766E" stroke="none" rx="8" />
+                        {/* Expense items */}
+                        <text x="20" y="115" fontSize="11" fontWeight="bold" fill="#123F3A">Recent</text>
+                        <rect x="20" y="122" width="240" height="26" fill="white" stroke="#123F3A" strokeWidth="1.5" rx="6" />
+                        <circle cx="35" cy="135" r="4" fill="#0F766E" />
+                        <text x="48" y="130" fontSize="10" fontWeight="bold" fill="#123F3A">Food</text>
+                        <text x="48" y="142" fontSize="9" fill="#999">Lechon sa Carcar</text>
+                        <text x="253" y="135" fontSize="10" fontWeight="bold" fill="#123F3A" textAnchor="end">₱1,200</text>
+                        {/* Packing section */}
+                        <text x="20" y="175" fontSize="12" fontWeight="bold" fill="#123F3A">Packing</text>
+                        <rect x="20" y="183" width="240" height="18" fill="#E8E8E8" stroke="#123F3A" strokeWidth="1.5" rx="6" />
+                        <rect x="20" y="183" width="120" height="18" fill="#F2A93B" stroke="none" rx="6" />
+                        <text x="135" y="197" fontSize="9" fontWeight="bold" fill="#123F3A">50%</text>
+                        {/* Checklist items */}
+                        <g>
+                          <rect x="20" y="212" width="240" height="24" fill="white" stroke="#123F3A" strokeWidth="1.5" rx="6" />
+                          <rect x="28" y="219" width="14" height="14" fill="#0F766E" stroke="#123F3A" strokeWidth="1" rx="3" />
+                          <line x1="32" y1="224" x2="36" y2="228" stroke="#FFF4E0" strokeWidth="1.5" />
+                          <text x="48" y="227" fontSize="10" fill="#123F3A">Swimwear</text>
+                          <rect x="260" y="218" width="8" height="8" fill="#C2410C" stroke="#123F3A" strokeWidth="1" rx="2" />
+                        </g>
+                      </svg>
+                    )}
+                    {item.step === 4 && (
+                      <svg viewBox="0 0 280 320" className="w-full" aria-hidden="true">
+                        {/* Export mockup */}
+                        <rect x="10" y="10" width="260" height="300" fill="#FFF4E0" stroke="#123F3A" strokeWidth="2" rx="12" />
+                        {/* Header */}
+                        <text x="140" y="40" fontSize="14" fontWeight="bold" fill="#123F3A" textAnchor="middle">Your trips</text>
+                        {/* Trip card */}
+                        <rect x="20" y="55" width="240" height="70" fill="white" stroke="#123F3A" strokeWidth="2" rx="8" />
+                        <circle cx="40" cy="75" r="12" fill="#F2A93B" stroke="#123F3A" strokeWidth="1.5" />
+                        <path d="M38 72L40 74L44 70" stroke="#123F3A" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+                        <text x="65" y="75" fontSize="12" fontWeight="bold" fill="#123F3A">Siargao trip</text>
+                        <text x="65" y="89" fontSize="10" fill="#999">Aug 10 to Aug 14</text>
+                        <text x="225" y="110" fontSize="9" fill="#999" textAnchor="end">4 stops</text>
+                        {/* Buttons */}
+                        <rect x="20" y="140" width="110" height="30" fill="white" stroke="#123F3A" strokeWidth="2" rx="15" />
+                        <text x="75" y="161" fontSize="10" fontWeight="bold" fill="#123F3A" textAnchor="middle">Export</text>
+                        <rect x="150" y="140" width="110" height="30" fill="white" stroke="#123F3A" strokeWidth="2" rx="15" />
+                        <text x="205" y="161" fontSize="10" fontWeight="bold" fill="#123F3A" textAnchor="middle">Import</text>
+                        {/* File icon */}
+                        <g transform="translate(100, 200)">
+                          <rect x="0" y="0" width="80" height="90" fill="white" stroke="#123F3A" strokeWidth="2" rx="6" />
+                          <path d="M50 0V20L70 20" fill="none" stroke="#123F3A" strokeWidth="2" />
+                          <circle cx="40" cy="40" r="3" fill="#123F3A" />
+                          <line x1="30" y1="45" x2="50" y2="45" stroke="#123F3A" strokeWidth="1.5" />
+                          <line x1="30" y1="52" x2="50" y2="52" stroke="#123F3A" strokeWidth="1.5" />
+                          <line x1="30" y1="59" x2="50" y2="59" stroke="#123F3A" strokeWidth="1.5" />
+                          <text x="40" y="80" fontSize="9" fontWeight="bold" fill="#123F3A" textAnchor="middle">backup.json</text>
+                        </g>
+                      </svg>
+                    )}
+                  </div>
                 </div>
-                <h3 className="mt-4 text-lg font-extrabold text-ink">
-                  {feature.title}
-                </h3>
-                <p className="mt-2 text-base leading-relaxed text-body">
-                  {feature.body}
-                </p>
+                {/* Text content */}
+                <div className={item.step % 2 === 0 ? "md:order-1" : ""}>
+                  <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-full border-2 border-ink bg-mango font-display text-lg font-extrabold text-ink">
+                    {item.step}
+                  </div>
+                  <h3 className="text-2xl font-extrabold text-ink">{item.title}</h3>
+                  <p className="mt-3 text-base leading-relaxed text-body">{item.body}</p>
+                </div>
               </div>
             ))}
           </div>
